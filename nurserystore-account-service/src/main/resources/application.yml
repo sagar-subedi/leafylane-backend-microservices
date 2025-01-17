@@ -1,0 +1,67 @@
+server:
+  port: ${SERVER_PORT:4002}
+spring:
+  application:
+    name: nurserystore-account-service
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+  zipkin:
+    base-url: http://${ZIPKIN_HOST:localhost:9411}
+    enabled: true
+    service:
+      name: bookstore-account-service
+    message-timeout: 10
+  flyway:
+    table: account_service_flyway_history
+    baseline-on-migrate: true
+    baseline-version: 0.9
+  main:
+    allow-bean-definition-overriding: true
+
+logging:
+  level:
+    np.com.sagar88.*: DEBUG
+
+management:
+  endpoint:
+    hystrix:
+      stream:
+        enabled: true
+
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    database: h2
+    open-in-view: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:bookstore_db;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+      path: /h2-console
+
+management:
+  influx:
+    metrics:
+      export:
+        enabled: false
