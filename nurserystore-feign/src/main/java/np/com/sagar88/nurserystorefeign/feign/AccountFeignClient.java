@@ -1,7 +1,8 @@
 package np.com.sagar88.nurserystorefeign.feign;
 
-import np.com.sagar88.nurserystorecatalogueservice.feign.web.GetUserInfoResponse;
-import np.com.sagar88.nurserystorecatalogueservice.feign.web.GetUserResponse;
+
+import np.com.sagar88.nurserystorefeign.web.GetUserInfoResponse;
+import np.com.sagar88.nurserystorefeign.web.GetUserResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

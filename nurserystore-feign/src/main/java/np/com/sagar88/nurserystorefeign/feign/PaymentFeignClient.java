@@ -1,8 +1,8 @@
 package np.com.sagar88.nurserystorefeign.feign;
 
-import np.com.sagar88.nurserystorecatalogueservice.feign.web.CreatePaymentRequest;
-import np.com.sagar88.nurserystorecatalogueservice.feign.web.CreatePaymentResponse;
-import np.com.sagar88.nurserystorecatalogueservice.feign.web.GetPaymentMethodResponse;
+import np.com.sagar88.nurserystorefeign.web.CreatePaymentRequest;
+import np.com.sagar88.nurserystorefeign.web.CreatePaymentResponse;
+import np.com.sagar88.nurserystorefeign.web.GetPaymentMethodResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
