@@ -17,6 +17,13 @@ spring:
     baseline-version: 0.9
   main:
     allow-bean-definition-overriding: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://127.0.0.1:8080
+          jwk-set-uri: http://127.0.0.1:8080/oauth2/jwks # Add jwkSetUri configuration, resource server will not ping authorization server on startup.
+
 
 logging:
   level:
@@ -36,8 +43,7 @@ spring:
     activate:
       on-profile: local
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    database: h2
+#    database: h2
     open-in-view: true
     hibernate:
       ddl-auto: none
@@ -45,20 +51,21 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
         show_sql: true
         use_sql_comments: true
         format_sql: true
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:bookstore_db;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;DB_CLOSE_ON_EXIT=FALSE
-    username: sa
-    password:
-  h2:
-    console:
-      enabled: true
-      settings:
-        web-allow-others: true
-      path: /h2-console
+    url: jdbc:postgresql://localhost:5432/nursery_store_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+#    url: jdbc:h2:~/home/bookstoree_db;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;DB_CLOSE_ON_EXIT=FALSE;SCHEMA=PUBLIC;
+#    username: sa
+#    password:
+#  h2:
+#    console:
+#      enabled: true
 
 management:
   influx:
