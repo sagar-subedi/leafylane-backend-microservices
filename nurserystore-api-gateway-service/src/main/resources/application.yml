@@ -1,0 +1,35 @@
+server:
+  port: 8765
+#  servlet:
+#    session:
+#      cookie:
+#        name: CLIENT-SESSION
+spring:
+  application:
+    name: nurserystore-api-gateway-service
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://127.0.0.1:8080
+#          jwk-set-uri: http://127.0.0.1:8080/oauth2/jwks # Add jwkSetUri configuration, resource server will not ping authorization server on startup.
+  cloud:
+    gateway:
+      routes:
+        - id: nurserystore-account-service
+          uri: http://localhost:4002/
+          predicates:
+            - Path=/account/**
+          filters:
+            - StripPrefix=1
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            allowedHeaders: "*"
+
