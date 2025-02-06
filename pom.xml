@@ -20,7 +20,7 @@
 
     <modules>
 <!--        <module>nurserystore-commons</module>-->
-<!--        <module>nurserystore-feign</module>-->
+        <module>nurserystore-feign</module>
 <!--        <module>nurserystore-api-gateway-service</module>-->
 <!--        <module>nurserystore-eureka-discovery-service</module>-->
         <module>nurserystore-account-service</module>
