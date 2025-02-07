@@ -46,7 +46,7 @@
 //        .securitySchemes(Arrays.asList(apiKey()))
 //        .securityContexts(Collections.singletonList(securityContext()))
 //        .select()
-//        .apis(RequestHandlerSelectors.basePackage("com.devd.spring"))
+//        .apis(RequestHandlerSelectors.basePackage("np.com.sagar88"))
 //        .paths(PathSelectors.any())
 //        .build()
 //        .apiInfo(apiInfo);
