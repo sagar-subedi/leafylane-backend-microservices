@@ -3,9 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.1</version>
+		<groupId>np.com.sagar88.nurserystore</groupId>
+		<artifactId>nurserystore-application-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>np.com.sagar88</groupId>
@@ -13,6 +13,12 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>nurserystore-payment-service</name>
 	<description>Demo project for Spring Boot</description>
+	<properties>
+		<java.version>17</java.version>
+		<jjwt.version>0.9.0</jjwt.version>
+		<skip-docker-plugin>true</skip-docker-plugin>
+		<docker-image-name>order-service</docker-image-name>
+	</properties>
 	<url/>
 	<licenses>
 		<license/>
@@ -26,9 +32,6 @@
 		<tag/>
 		<url/>
 	</scm>
-	<properties>
-		<java.version>17</java.version>
-	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -37,9 +40,67 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-hateoas</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<!--			<version>42.7.5</version>-->
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.stripe/stripe-java -->
+		<dependency>
+			<groupId>com.stripe</groupId>
+			<artifactId>stripe-java</artifactId>
+			<version>28.3.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
