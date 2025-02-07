@@ -26,7 +26,7 @@
         <module>nurserystore-account-service</module>
         <module>nurserystore-billing-service</module>
         <module>nurserystore-catalogue-service</module>
-<!--        <module>nurserystore-order-service</module>-->
+        <module>nurserystore-order-service</module>
 <!--        <module>nurserystore-payment-service</module>-->
         <module>nurserystore-oauth2-authorization-server</module>
     </modules>
