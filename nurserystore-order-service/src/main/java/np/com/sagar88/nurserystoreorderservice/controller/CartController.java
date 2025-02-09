@@ -23,7 +23,7 @@ public class CartController {
     private CartService cartService;
 
     @PostMapping("/cart")
-    @PreAuthorize("hasAuthority('STANDARD_USER') or hasAuthority('ROLE_ADMIN')" )
+    @PreAuthorize("hasAuthority('ROLE_STANDARD_USER') or hasAuthority('ROLE_ADMIN')" )
     public ResponseEntity<CreateCartResponse> createCart() {
 
         String cartId = cartService.createCart();

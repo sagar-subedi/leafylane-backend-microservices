@@ -21,7 +21,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             return new CustomUserDetails("1", "admin", "{noop}password",
                     authorities);
         } else if ("user".equals(username)) {
-            List<GrantedAuthority> authorities = new ArrayList<>(List.of(new SimpleGrantedAuthority("ROLE_USER")));
+            List<GrantedAuthority> authorities = new ArrayList<>(List.of(new SimpleGrantedAuthority("ROLE_STANDARD_USER")));
             return new CustomUserDetails("1", "user", "{noop}password",
                     authorities);
         } else {
