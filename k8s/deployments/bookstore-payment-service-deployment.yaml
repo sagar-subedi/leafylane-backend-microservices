@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.35.0 (9532ceef3)
+  labels:
+    io.kompose.service: bookstore-payment-service
+  name: bookstore-payment-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: bookstore-payment-service
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yml
+        kompose.version: 1.35.0 (9532ceef3)
+      labels:
+        io.kompose.service: bookstore-payment-service
+    spec:
+      containers:
+        - env:
+            - name: SERVER_PORT
+              value: "8001"
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+            - name: ZIPKIN_HOST
+              value: bookstore-zipkin:9411
+          image: bookstore-payment-service
+          name: bookstore-payment-service
+          ports:
+            - containerPort: 8001
+              protocol: TCP
+      hostname: bookstore-payment-service
+      restartPolicy: Always
