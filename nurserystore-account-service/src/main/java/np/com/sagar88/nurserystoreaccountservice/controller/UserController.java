@@ -37,7 +37,7 @@ public class UserController {
   private UserService userService;
 
   @PostMapping("/user")
-  @PreAuthorize("hasAuthority('ADMIN_USER')")
+  @PreAuthorize("hasAuthority('ROLE_ADMIN')")
   public ResponseEntity<?> createUser(@RequestBody @Valid CreateUserRequest createUserRequest) {
 
     String userId = userService.createUser(createUserRequest);
@@ -50,7 +50,7 @@ public class UserController {
   }
 
   @GetMapping("/user")
-  @PreAuthorize("hasAuthority('ADMIN_USER')")
+  @PreAuthorize("hasAuthority('ROLE_ADMIN')")
   public ResponseEntity<GetUserResponse> getUser(
       @RequestParam("userName") Optional<String> userName
       , @RequestParam("userId") Optional<String> userId) {
@@ -65,7 +65,7 @@ public class UserController {
   }
 
   @PutMapping("/user/{userId}")
-  @PreAuthorize("hasAuthority('ADMIN_USER')")
+  @PreAuthorize("hasAuthority('ROLE_ADMIN')")
   public ResponseEntity<?> updateUser(@PathVariable("userId") String userId,
                                       @RequestBody @Valid UpdateUserRequestFromAdmin updateUserRequestFromAdmin) {
 
@@ -74,7 +74,7 @@ public class UserController {
   }
 
   @GetMapping("/users")
-  @PreAuthorize("hasAuthority('SCOPE_message.read')")
+//  @PreAuthorize("hasAuthority('ROLE_ADMIN')")
   public ResponseEntity<List<GetUserResponse>> getAllUsers() {
     List<GetUserResponse> allUsers = userService.getAllUsers();
     return ResponseEntity.ok(allUsers);
@@ -93,7 +93,7 @@ public class UserController {
   }
 
   @DeleteMapping("/user/{userId}")
-  @PreAuthorize("hasAuthority('ADMIN_USER')")
+  @PreAuthorize("hasAuthority('ROLE_ADMIN')")
   public ResponseEntity<?> deleteUserById(@PathVariable("userId") String userId){
     userService.deleteUserById(userId);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

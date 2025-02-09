@@ -26,7 +26,7 @@ public class RoleController {
   private RoleService roleService;
 
   @PostMapping("/role")
-  @PreAuthorize("hasAuthority('ADMIN_USER')")
+  @PreAuthorize("hasAuthority('ROLE_ADMIN')")
   public ResponseEntity<?> createRole(@RequestBody @Valid CreateRoleRequest createRoleRequest) {
 
     String userId = roleService.createRole(createRoleRequest);
@@ -39,7 +39,7 @@ public class RoleController {
   }
 
   @GetMapping("/roles")
-  @PreAuthorize("hasAuthority('ADMIN_USER')")
+  @PreAuthorize("hasAuthority('ROLE_ADMIN')")
   public ResponseEntity<?> getAllRoles() {
     List<Role> allRoles = roleService.getAllRoles();
     return ResponseEntity.ok(allRoles);

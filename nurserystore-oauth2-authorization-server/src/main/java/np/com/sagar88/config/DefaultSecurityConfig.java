@@ -37,7 +37,7 @@ public class DefaultSecurityConfig {
     UserDetailsService users() {
         UserDetails user1 = User.withUsername("admin")
                 .password("{noop}password")
-                .roles("USER")
+                .roles("ADMIN")
                 .build();
         UserDetails user2 = User.withUsername("user")
                 .password("{noop}password")

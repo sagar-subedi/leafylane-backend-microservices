@@ -39,7 +39,7 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping("/product")
-    @PreAuthorize("hasAuthority('ADMIN_USER')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<?> createProduct(@RequestBody @Valid CreateProductRequest createProductRequest){
 
         String product = productService.createProduct(createProductRequest);
@@ -61,7 +61,7 @@ public class ProductController {
     }
 
     @DeleteMapping("/product/{productId}")
-    @PreAuthorize("hasAuthority('ADMIN_USER')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<?> deleteProductCategory(@PathVariable("productId") String productId) {
 
         productService.deleteProduct(productId);
@@ -70,7 +70,7 @@ public class ProductController {
     }
 
     @PutMapping("/product")
-    @PreAuthorize("hasAuthority('ADMIN_USER')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<?> updateProduct(@RequestBody @Valid UpdateProductRequest updateProductRequest) {
 
         productService.updateProduct(updateProductRequest);

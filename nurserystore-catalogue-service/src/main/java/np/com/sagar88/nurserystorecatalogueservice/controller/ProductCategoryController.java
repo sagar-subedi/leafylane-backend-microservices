@@ -37,7 +37,7 @@ public class ProductCategoryController {
     ProductCategoryService productCategoryService;
 
     @PostMapping("/productCategory")
-    @PreAuthorize("hasAuthority('ADMIN_USER')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<?> createProductCategory(@RequestBody @Valid CreateProductCategoryRequest createProductCategoryRequest) {
 
         String productCategory = productCategoryService.createProductCategory(createProductCategoryRequest);
@@ -58,7 +58,7 @@ public class ProductCategoryController {
     }
 
     @DeleteMapping("/productCategory/{productCategoryId}")
-    @PreAuthorize("hasAuthority('ADMIN_USER')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<?> deleteProductCategory(@PathVariable("productCategoryId") String productCategoryId) {
 
         productCategoryService.deleteProductCategory(productCategoryId);
@@ -67,7 +67,7 @@ public class ProductCategoryController {
     }
 
     @PutMapping("/productCategory")
-    @PreAuthorize("hasAuthority('ADMIN_USER')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<?> updateProductCategory(@RequestBody @Valid UpdateProductCategoryRequest updateProductCategoryRequest) {
 
         productCategoryService.updateProductCategory(updateProductCategoryRequest);

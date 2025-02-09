@@ -36,7 +36,7 @@ import java.util.UUID;
 public class ImageUploadController {
 
     @PostMapping("image/upload")
-    @PreAuthorize("hasAuthority('ADMIN_USER')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<?> uploadImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
         if (file == null) {
             throw new RunTimeExceptionPlaceHolder("Invalid Image!!");

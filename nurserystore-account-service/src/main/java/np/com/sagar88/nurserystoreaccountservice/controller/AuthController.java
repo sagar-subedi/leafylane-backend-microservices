@@ -29,7 +29,7 @@ public class AuthController {
   AuthService authService;
 
   @PostMapping("/client")
-  @PreAuthorize("hasAuthority('ADMIN_USER')")
+  @PreAuthorize("hasAuthority('ROLE_ADMIN')")
   public ResponseEntity<CreateOAuthClientResponse> createOAuthClient(
       @Valid @RequestBody CreateOAuthClientRequest createOAuthClientRequest) {
 

@@ -49,7 +49,7 @@ public class OrderController {
     }
 
     @GetMapping("/orders")
-    @PreAuthorize("hasAuthority('ADMIN_USER')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<List<CreateOrderResponse>> getAllOrders() {
         List<CreateOrderResponse> createOrderResponse = orderService.getAllOrders();
         return ResponseEntity.ok(createOrderResponse);
