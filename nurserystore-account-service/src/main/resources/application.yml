@@ -1,5 +1,5 @@
 server:
-  port: ${SERVER_PORT:4002}
+  port: ${SERVER_PORT:4001}
 spring:
   application:
     name: nurserystore-account-service
@@ -12,7 +12,11 @@ spring:
       name: bookstore-account-service
     message-timeout: 10
   flyway:
+    url: jdbc:mysql://localhost:3306/nurserystore_db
     table: account_service_flyway_history
+    user: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
     baseline-on-migrate: true
     baseline-version: 0.9
   main:
@@ -51,15 +55,20 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
         show_sql: true
         use_sql_comments: true
         format_sql: true
+    #  datasource:
+    #    url: jdbc:postgresql://localhost:5432/nursery_store_db
+    #    username: postgres
+    #    password: postgres
+    #    driver-class-name: org.postgresql.Driver
   datasource:
-    url: jdbc:postgresql://localhost:5432/nursery_store_db
-    username: postgres
-    password: postgres
-    driver-class-name: org.postgresql.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/nurserystore_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: root
 #    url: jdbc:h2:~/home/bookstoree_db;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;DB_CLOSE_ON_EXIT=FALSE;SCHEMA=PUBLIC;
 #    username: sa
 #    password:
