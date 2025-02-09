@@ -22,9 +22,9 @@
 <!--        <module>nurserystore-commons</module>-->
         <module>nurserystore-feign</module>
 <!--        <module>nurserystore-api-gateway-service</module>-->
-<!--        <module>nurserystore-eureka-discovery-service</module>-->
+        <module>nurserystore-eureka-discovery-service</module>
         <module>nurserystore-account-service</module>
-        <module>nurserystore-billing-service</module>
+        <module>nurserystore-address-service</module>
         <module>nurserystore-catalogue-service</module>
         <module>nurserystore-order-service</module>
         <module>nurserystore-payment-service</module>
@@ -69,6 +69,12 @@
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
+            <version>9.16.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-mysql</artifactId>
             <version>9.16.1</version>
         </dependency>
 
