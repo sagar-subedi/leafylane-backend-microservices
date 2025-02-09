@@ -12,23 +12,24 @@ import java.util.stream.Collectors;
 
 @Component
 public class CustomTokenCustomizer implements OAuth2TokenCustomizer<JwtEncodingContext> {
-
+//This is the place to customize the JWT token that's being created
     @Override
     public void customize(JwtEncodingContext context) {
         Authentication authentication = context.getPrincipal();
         if (authentication != null && authentication.isAuthenticated()) {
             Object principal = authentication.getPrincipal();
 
-            if (principal instanceof UserDetails) {
-                UserDetails userDetails = (UserDetails) principal;
+            if (principal instanceof CustomUserDetails) {
+                CustomUserDetails userDetails = (CustomUserDetails) principal;
 
                 // Extract roles/authorities from UserDetails
                 List<String> roles = userDetails.getAuthorities().stream()
                         .map(GrantedAuthority::getAuthority)
                         .collect(Collectors.toList());
 
-                // Add roles to the JWT token
+                // Add roles to the JWT token, and userId as well
                 context.getClaims().claim("roles", roles);
+                context.getClaims().claim("user_id",userDetails.getUserId());
             } else {
                 // Handle cases where the principal is not a UserDetails object
                 System.out.println("Principal is not a UserDetails object: " + principal.getClass().getName());
