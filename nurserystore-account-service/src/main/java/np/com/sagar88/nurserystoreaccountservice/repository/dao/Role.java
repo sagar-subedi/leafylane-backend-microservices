@@ -29,7 +29,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "\"ROLE\"")
+@Table(name = "ROLE")
 @Builder
 public class Role extends DateAudit {
 

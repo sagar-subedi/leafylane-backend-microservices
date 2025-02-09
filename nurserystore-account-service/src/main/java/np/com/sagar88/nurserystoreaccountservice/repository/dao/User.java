@@ -30,13 +30,13 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "\"USERS\"")
+@Table(name = "USER")
 @Builder
 public class User extends DateAudit {
 
   @ManyToMany(fetch = FetchType.EAGER,
       cascade = CascadeType.DETACH)
-  @JoinTable(name = "\"USER_ROLES\"",
+  @JoinTable(name = "USER_ROLES",
       joinColumns = {@JoinColumn(name = "user_id")},
       inverseJoinColumns = {@JoinColumn(name = "role_id")})
   Set<Role> roles;
