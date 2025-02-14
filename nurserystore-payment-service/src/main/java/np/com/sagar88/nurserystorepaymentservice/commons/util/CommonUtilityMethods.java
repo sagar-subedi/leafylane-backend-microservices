@@ -22,7 +22,7 @@ public class CommonUtilityMethods {
     public static String getUserNameFromToken(Authentication authentication) {
         if (authentication instanceof JwtAuthenticationToken jwtAuth) {
             Map<String, Object> claims = jwtAuth.getToken().getClaims();
-            return (String) claims.get("user_name"); // Ensure the claim exists in JWT
+            return (String) claims.get("sub"); // Ensure the claim exists in JWT
         }
         return null;
     }
