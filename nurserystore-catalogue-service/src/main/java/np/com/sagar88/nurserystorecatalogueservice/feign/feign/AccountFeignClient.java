@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author: Sagar Subedi,
  * Date : 2023-07-02
  */
-@FeignClient("bookstore-account-service")
+@FeignClient("nurserystore-account-service")
 public interface AccountFeignClient {
 
     @GetMapping("/user")

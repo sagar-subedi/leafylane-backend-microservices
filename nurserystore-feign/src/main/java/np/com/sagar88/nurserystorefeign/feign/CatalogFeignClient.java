@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author: Sagar Subedi,
  * Date : 2024-06-03
  */
-@FeignClient("bookstore-catalog-service")
+@FeignClient("nurserystore-catalog-service")
 public interface CatalogFeignClient {
 
     @GetMapping("/product/{productId}")

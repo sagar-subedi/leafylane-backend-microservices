@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 /**
  * @author Sagar Subedi, Date : 15-Dec-2024
  */
-@FeignClient("bookstore-payment-service")
+@FeignClient("nurserystore-payment-service")
 public interface PaymentFeignClient {
 
     @GetMapping("/paymentMethod/{paymentMethodId}")
