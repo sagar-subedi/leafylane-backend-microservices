@@ -16,13 +16,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // Mocking a user with userId = 1, and userId = 2 (Replace with DB lookup in future)
-        if ("admin".equals(username)) {
+        if ("admin.admin".equals(username)) {
             List<GrantedAuthority> authorities = new ArrayList<>(List.of(new SimpleGrantedAuthority("ROLE_ADMIN")));
-            return new CustomUserDetails("1", "admin", "{noop}password",
+            return new CustomUserDetails("xcvcvbvv-ba5d-4b92-85be-dfgdfgdfgdfg", "admin.admin", "{noop}password",
                     authorities);
-        } else if ("user".equals(username)) {
+        } else if ("sagarsubedi01".equals(username)) {
             List<GrantedAuthority> authorities = new ArrayList<>(List.of(new SimpleGrantedAuthority("ROLE_STANDARD_USER")));
-            return new CustomUserDetails("1", "user", "{noop}password",
+            return new CustomUserDetails("rertertr-6727-4229-a4ab-erererererer", "sagarsubedi01", "{noop}password",
                     authorities);
         } else {
             throw new UsernameNotFoundException("User not found: " + username);
