@@ -28,4 +28,4 @@ public class ResourceServerConfig {
     }
 }
 
-//don't know why /oauth/token is relevant here, but can remove if doesn't play no role
+//don't know why /oauth/token is relevant here, but can remove if doesn't play no role -> seems like a copy paste
