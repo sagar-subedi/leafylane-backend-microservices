@@ -11,8 +11,8 @@ import org.springframework.context.annotation.ComponentScan;
  * @author Sagar Subedi, Date : 25-Jul-2020
  */
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.devd.spring"})
-@EnableFeignClients(basePackages = {"com.devd.spring"})
+@ComponentScan(basePackages = {"np.com.sagar88"})
+@EnableFeignClients(basePackages = {"np.com.sagar88"})
 @EnableDiscoveryClient
 public class NurserystorePaymentServiceApplication {
 

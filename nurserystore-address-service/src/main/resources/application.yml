@@ -9,7 +9,7 @@ spring:
     base-url: http://${ZIPKIN_HOST:localhost:9411}
     enabled: true
     service:
-      name: bookstore-billing-service
+      name: nurserystore-billing-service
     message-timeout: 10
   security:
     oauth2:
@@ -129,6 +129,6 @@ spring:
         format_sql: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://bookstore-mysql-db:3306/nurserystore_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    url: jdbc:mysql://nurserystore-mysql-db:3306/nurserystore_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
     password: root

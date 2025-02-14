@@ -9,7 +9,7 @@ spring:
     base-url: http://${ZIPKIN_HOST:localhost:9411}
     enabled: true
     service:
-      name: bookstore-account-service
+      name: nurserystore-account-service
     message-timeout: 10
   flyway:
     url: jdbc:mysql://localhost:3306/nurserystore_db

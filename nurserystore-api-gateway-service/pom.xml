@@ -15,7 +15,7 @@
 		<version>3.1.5</version>
 	</parent>
 
-	<artifactId>bookstore-api-gateway-service</artifactId>
+	<artifactId>nurserystore-api-gateway-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>nurserystore-api-gateway-service</name>
 	<description>Discovery Server for Nurserystore App</description>

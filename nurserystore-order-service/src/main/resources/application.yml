@@ -17,7 +17,7 @@ spring:
     base-url: http://${ZIPKIN_HOST:localhost:9411}
     enabled: true
     service:
-      name: bookstore-order-service
+      name: nurserystore-order-service
     message-timeout: 10
   sleuth:
     sampler:
@@ -40,12 +40,12 @@ management:
         enabled: true
 
 ---
-
-config:
-  activate:
-    on-profile: local
+spring:
+  config:
+    activate:
+      on-profile: local
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
+#    database-platform: org.hibernate.dialect.MySQL8Dialect
 #    database: h2
     open-in-view: true
     hibernate:
@@ -128,6 +128,6 @@ spring:
         format_sql: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://bookstore-mysql-db:3306/nurserystore_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    url: jdbc:mysql://nurserystore-mysql-db:3306/nurserystore_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
     password: root

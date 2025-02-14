@@ -6,7 +6,7 @@ service:
 
 spring:
   application:
-    name: bookstore-payment-service
+    name: nurserystore-payment-service
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:local}
   security:
@@ -20,7 +20,7 @@ spring:
     base-url: http://${ZIPKIN_HOST:localhost:9411}
     enabled: true
     service:
-      name: bookstore-payment-service
+      name: nurserystore-payment-service
     message-timeout: 10
   sleuth:
     sampler:
