@@ -26,7 +26,7 @@ public class CartServiceImpl implements CartService {
     public Cart getCart() {
     
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userName = (String) authentication.getPrincipal();
+        String userName = authentication.getName();
     
         Cart cartByUserName = cartRepository.findCartByUserName(userName);
 
@@ -58,7 +58,7 @@ public class CartServiceImpl implements CartService {
 
         //Get the userName from the token.
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userName = (String) authentication.getPrincipal();
+        String userName = authentication.getName();
 
         Cart cartByUserName = cartRepository.findCartByUserName(userName);
 

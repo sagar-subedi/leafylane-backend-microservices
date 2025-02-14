@@ -41,7 +41,7 @@ public class CartItemServiceImpl implements CartItemService {
     public void addCartItem(CartItemRequest cartItemRequest) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userName = (String) authentication.getPrincipal();
+        String userName = authentication.getName();
         Cart cartByUserName = cartService.getCartByUserName(userName);
 
         synchronized (CartServiceImpl.class) {
