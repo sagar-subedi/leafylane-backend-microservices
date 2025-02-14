@@ -11,7 +11,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.sql.Timestamp;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
@@ -25,10 +25,10 @@ public abstract class DateAudit implements Serializable {
 
   @CreatedDate
   @Column(name = "CREATED_AT")
-  private Instant createdAt;
+  private Timestamp createdAt;
 
   @LastModifiedDate
   @Column(name = "UPDATED_AT")
-  private Instant updatedAt;
+  private Timestamp updatedAt;
 
 }
