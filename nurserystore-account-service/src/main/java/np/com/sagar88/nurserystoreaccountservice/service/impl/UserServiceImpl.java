@@ -16,8 +16,6 @@ import np.com.sagar88.nurserystoreaccountservice.web.MapUserToRolesRequest;
 import np.com.sagar88.nurserystoreaccountservice.web.UpdateUserRequest;
 import np.com.sagar88.nurserystoreaccountservice.web.UpdateUserRequestFromAdmin;
 import np.com.sagar88.nurserystoreaccountservice.commons.exception.Error;
-//import np.com.sagar88.nurserystorecommons.exception.ErrorResponse;
-//import np.com.sagar88.nurserystorecommons.exception.RunTimeExceptionPlaceHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -141,8 +139,7 @@ public class UserServiceImpl implements UserService {
   @Override
   public GetUserInfoResponse getUserInfo() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    String userName = (String) authentication.getPrincipal();
-
+    String userName = authentication.getName();
     GetUserResponse userByUserName = getUserByUserName(userName);
 
     return GetUserInfoResponse.builder()
@@ -159,7 +156,7 @@ public class UserServiceImpl implements UserService {
   public void updateUserInfo(UpdateUserRequest updateUserRequest) {
 
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    String userName = (String) authentication.getPrincipal();
+    String userName = authentication.getName();
 
     Optional<User> userNameOrEmailOptional = userRepository.findByUserNameOrEmail(userName, userName);
 
@@ -187,7 +184,7 @@ public class UserServiceImpl implements UserService {
   @Override
   public void deleteUserById(String userId) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    String userName = (String) authentication.getPrincipal();
+    String userName = authentication.getName();
     GetUserResponse userByUserId = getUserByUserId(userId);
 
     if(userName.equals(userByUserId.getUserName())){
@@ -236,14 +233,14 @@ public class UserServiceImpl implements UserService {
       user.setEmail(updateUserRequestFromAdmin.getEmail());
     }
 
-    if(user.getRoles().size()>0){
+    if(!user.getRoles().isEmpty()){
       MapUserToRolesRequest mapUserToRolesRequest = new MapUserToRolesRequest();
       List<String> existingRoles = user.getRoles().stream().map(Role::getRoleName).collect(Collectors.toList());
       mapUserToRolesRequest.setRoleNames(existingRoles);
       userRoleService.removeRolesFromUser(user.getUserName(), mapUserToRolesRequest);
     }
 
-    if (updateUserRequestFromAdmin.getRoles().size() > 0) {
+    if (!updateUserRequestFromAdmin.getRoles().isEmpty()) {
       MapUserToRolesRequest mapUserToRolesRequest = new MapUserToRolesRequest();
       mapUserToRolesRequest.setRoleNames(updateUserRequestFromAdmin.getRoles());
       userRoleService.mapUserToRoles(user.getUserName(), mapUserToRolesRequest);
