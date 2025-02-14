@@ -1,13 +1,13 @@
 
 INSERT INTO USER (USER_ID, FIRST_NAME, LAST_NAME, PASSWORD, USER_NAME, EMAIL)  VALUES
-('asdasdsa-6727-4229-a4ab-zxczxcxczxcc', 'Cores', 'DevD', '$2a$10$2XWkMz42.EApOBnx7nJaSupInwvBfPCGb5HZwWM.2RsC92joeAQzq', 'devd.cores', 'john.doe@gmail.com'),
+('asdasdsa-6727-4229-a4ab-zxczxcxczxcc', 'Subedi', 'Saagar', '$2a$10$2XWkMz42.EApOBnx7nJaSupInwvBfPCGb5HZwWM.2RsC92joeAQzq', 'sagar.subedi', 'john.doe@gmail.com'),
 ('xcvcvbvv-ba5d-4b92-85be-dfgdfgdfgdfg', 'Admin', 'Admin', '$2a$10$br7HrUzeQQ0ddR2ogg7L1.aRQ1sGC1rud.mL8VQBEKaMkx1G5zXR6', 'admin.admin', 'admin@gmail.com'),
-('rertertr-6727-4229-a4ab-erererererer', 'Cores', 'DevD', '$2a$10$2XWkMz42.EApOBnx7nJaSupInwvBfPCGb5HZwWM.2RsC92joeAQzq', 'sagarsubedi01', 'sagarsubedi01@gmail.com'),
-('cvcvbcvb-ba5d-4b92-85be-fggfgtrytyty', 'Admin', 'Admin', '$2a$10$br7HrUzeQQ0ddR2ogg7L1.aRQ1sGC1rud.mL8VQBEKaMkx1G5zXR6', 'subedi.devaraj', 'subedi.devaraj@gmail.com'),
-('cvbserte-6727-4229-a4ab-vbnbvvnvbnvb', 'Cores', 'DevD', '$2a$10$2XWkMz42.EApOBnx7nJaSupInwvBfPCGb5HZwWM.2RsC92joeAQzq', 'rale.subedi', 'rale.subedi@gmail.com'),
-('xcvxvcgv-ba5d-4b92-85be-fghfghtryfgh', 'Admin', 'Admin', '$2a$10$br7HrUzeQQ0ddR2ogg7L1.aRQ1sGC1rud.mL8VQBEKaMkx1G5zXR6', 'devd.subedi', 'devd.subedi@gmail.com'),
-('ddfgdfgh-6727-4229-a4ab-ertdfgfdgdfg', 'Cores', 'DevD', '$2a$10$2XWkMz42.EApOBnx7nJaSupInwvBfPCGb5HZwWM.2RsC92joeAQzq', 'subedi.rale', 'subedi.rale@gmail.com'),
-('dfgdfgdf-ba5d-4b92-85be-vbvbvbnvbnjb', 'Admin', 'Admin', '$2a$10$br7HrUzeQQ0ddR2ogg7L1.aRQ1sGC1rud.mL8VQBEKaMkx1G5zXR6', 'devd.bro', 'devd.bro@gmail.com');
+('rertertr-6727-4229-a4ab-erererererer', 'Subedi', 'Saagar', '$2a$10$2XWkMz42.EApOBnx7nJaSupInwvBfPCGb5HZwWM.2RsC92joeAQzq', 'sagarsubedi01', 'sagarsubedi01@gmail.com'),
+('cvcvbcvb-ba5d-4b92-85be-fggfgtrytyty', 'Admin', 'Admin', '$2a$10$br7HrUzeQQ0ddR2ogg7L1.aRQ1sGC1rud.mL8VQBEKaMkx1G5zXR6', 'subedi.coder', 'subedi.coder@gmail.com'),
+('cvbserte-6727-4229-a4ab-vbnbvvnvbnvb', 'Subedi', 'Saagar', '$2a$10$2XWkMz42.EApOBnx7nJaSupInwvBfPCGb5HZwWM.2RsC92joeAQzq', 'pokhreli.subedi', 'pokhreli.subedi@gmail.com'),
+('xcvxvcgv-ba5d-4b92-85be-fghfghtryfgh', 'Admin', 'Admin', '$2a$10$br7HrUzeQQ0ddR2ogg7L1.aRQ1sGC1rud.mL8VQBEKaMkx1G5zXR6', 'sagar.pokhara', 'sagar.pokhara@gmail.com'),
+('ddfgdfgh-6727-4229-a4ab-ertdfgfdgdfg', 'Subedi', 'Saagar', '$2a$10$2XWkMz42.EApOBnx7nJaSupInwvBfPCGb5HZwWM.2RsC92joeAQzq', 'subedi.pokhara', 'subedi.pokhara@gmail.com'),
+('dfgdfgdf-ba5d-4b92-85be-vbvbvbnvbnjb', 'Admin', 'Admin', '$2a$10$br7HrUzeQQ0ddR2ogg7L1.aRQ1sGC1rud.mL8VQBEKaMkx1G5zXR6', 'sagar.bro', 'sagar.bro@gmail.com');
 
 INSERT INTO ROLE (ROLE_ID, ROLE_NAME, ROLE_DESCRIPTION) VALUES ('9601409f-4691-4281-886e-8f8987763b56', 'STANDARD_USER', 'Standard User - Has no admin rights');
 INSERT INTO ROLE (ROLE_ID, ROLE_NAME, ROLE_DESCRIPTION) VALUES ('f4b194d0-238b-41b5-8f18-630e5fcf3d8e', 'ROLE_ADMIN', 'Admin User - Has permission to perform admin tasks');
