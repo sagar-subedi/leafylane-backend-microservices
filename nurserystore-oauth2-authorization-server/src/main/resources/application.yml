@@ -1,19 +1,16 @@
-POSTGRES_USERNAME: "postgres"
-POSTGRES_PASSWORD: "postgres"
-POSTGRES_URL: "jdbc:postgresql://localhost:5432/postgres"
+MYSQL_USERNAME: "root"
+MYSQL_PASSWORD: "root"
+MYSQL_URL: "jdbc:mysql://localhost:3306/integrated_oauth?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true"
 
 spring:
   application:
     name: auth-server
   datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-    #    username: ${MYSQL_USERNAME:root} # update username
-    #    password: ${MYSQL_PASSWORD:123456} # update password
-#    url: jdbc:mysql://localhost:3306/integrated_oauth?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${MYSQL_USERNAME:root} # update username
+    password: ${MYSQL_PASSWORD:root} # update password
+    url: ${MYSQL_URL}
 
-    url: ${POSTGRES_URL}
-    username: ${POSTGRES_USERNAME:postgres} # update username
-    password: ${POSTGRES_PASSWORD:postgres} # update password
   flyway:
     baseline-on-migrate: true
     baseline-description: <<Flyway Baseline>>
@@ -24,7 +21,7 @@ spring:
 
 
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: update
 
