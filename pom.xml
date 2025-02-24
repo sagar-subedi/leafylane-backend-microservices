@@ -59,13 +59,6 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!--	Take care of version of postgres, incompatible version may cause issues-->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <!--			<version>42.7.5</version>-->
-        </dependency>
-
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
