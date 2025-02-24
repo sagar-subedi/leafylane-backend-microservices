@@ -47,34 +47,25 @@ spring:
     activate:
       on-profile: local
   jpa:
-#    database: h2
+    database: h2
     open-in-view: true
     hibernate:
       ddl-auto: none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
+
         show_sql: true
         use_sql_comments: true
         format_sql: true
-    #  datasource:
-    #    url: jdbc:postgresql://localhost:5432/nursery_store_db
-    #    username: postgres
-    #    password: postgres
-    #    driver-class-name: org.postgresql.Driver
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/nurserystore_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: root
-    password: root
-#    url: jdbc:h2:~/home/bookstoree_db;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;DB_CLOSE_ON_EXIT=FALSE;SCHEMA=PUBLIC;
-#    username: sa
-#    password:
-#  h2:
-#    console:
-#      enabled: true
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:nurserystore_db;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;DB_CLOSE_ON_EXIT=FALSE;SCHEMA=PUBLIC;
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
 
 management:
   influx:
