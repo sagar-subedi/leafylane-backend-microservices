@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @author: Sagar Subedi,
  * Date : 2019-13-06
  */
-@SpringBootApplication(scanBasePackages = {"np.com.sagar88.bookstorecommons"})
+@SpringBootApplication(scanBasePackages = {"np.com.sagar88.nurserystorecommons"})
 @ComponentScan(basePackages = {"np.com.sagar88"})
 //, excludeFilters={
 //		@ComponentScan.Filter(type=FilterType.ASSIGNABLE_TYPE, value=GlobalSecurityConfig.class)})
