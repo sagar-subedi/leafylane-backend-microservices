@@ -30,7 +30,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "USER")
+@Table(name = "USERS")
 @Builder
 public class User extends DateAudit {
 
