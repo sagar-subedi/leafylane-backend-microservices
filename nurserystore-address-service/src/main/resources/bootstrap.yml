@@ -55,7 +55,7 @@ management:
         flavor: telegraf
         port: 8125
       influx: #pushing influx metrics.
-        db: bookstore_influxdb_monitoring_metrics
+        db: nurserystore_influxdb_monitoring_metrics
         uri: http://nurserystore-influxdb:8086
         auto-create-db: true
   endpoints:
