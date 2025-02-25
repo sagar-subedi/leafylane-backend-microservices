@@ -1,0 +1,243 @@
+services:
+
+  # Database
+  nurserystore-mysql-db:
+    image: mysql:8
+    container_name: nurserystore-mysql-db
+    hostname: nurserystore-mysql-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'nurserystore_db'
+      MYSQL_USER: 'nurserystoreDBA'
+      MYSQL_PASSWORD: 'PaSSworD'
+      MYSQL_ROOT_PASSWORD: 'r00tPaSSworD'
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    volumes:
+      - nurserystore-db-volume:/var/lib/mysql
+    networks:
+      - nurserystore-app-network
+
+  # Core services
+  nurserystore-consul-discovery:
+    hostname: nurserystore-consul-discovery
+    image: hashicorp/consul
+    container_name: nurserystore-consul-discovery
+    restart: always
+    ports:
+      - "8500:8500"
+    networks:
+      - nurserystore-app-network
+
+#  nurserystore-spring-cloud-api-gateway-server:
+#    build:
+#      context: ./nurserystore-api-gateway-service
+#      args:
+#        JAR_FILE: nurserystore-api-gateway-service-0.0.1-SNAPSHOT.jar
+#      dockerfile: Dockerfile
+#    image: nurserystore-spring-cloud-api-gateway-server
+#    container_name: nurserystore-spring-cloud-api-gateway-server
+#    hostname: nurserystore-spring-cloud-api-gateway-server
+#    ports:
+#      - "8765:8765"
+#    networks:
+#      - nurserystore-app-network
+#    environment:
+#      - SERVER_PORT=8765
+#      - ZIPKIN_HOST=nurserystore-zipkin:9411
+#      - SPRING_PROFILES_ACTIVE=docker
+
+  nurserystore-account-service:
+    build:
+      context: ./nurserystore-account-service
+      args:
+        JAR_FILE: nurserystore-account-service-0.0.1-SNAPSHOT.jar
+      dockerfile: Dockerfile
+    image: nurserystore-account-service
+    container_name: nurserystore-account-service
+    hostname: nurserystore-account-service
+    ports:
+      - "4001:4001"
+    networks:
+      - nurserystore-app-network
+    environment:
+      - SERVER_PORT=4001
+      - ZIPKIN_HOST=nurserystore-zipkin:9411
+      - SPRING_PROFILES_ACTIVE=docker
+
+  nurserystore-billing-service:
+    build:
+      context: ./nurserystore-address-service
+      args:
+        JAR_FILE: nurserystore-address-service-0.0.1-SNAPSHOT.jar
+      dockerfile: Dockerfile
+    image: nurserystore-address-service
+    container_name: nurserystore-address-service
+    hostname: nurserystore-address-service
+    ports:
+      - "5001:5001"
+    networks:
+      - nurserystore-app-network
+    environment:
+      - SERVER_PORT=5001
+      - ZIPKIN_HOST=nurserystore-zipkin:9411
+      - SPRING_PROFILES_ACTIVE=docker
+
+  nurserystore-catalog-service:
+    build:
+      context: ./nurserystore-catalogue-service
+      args:
+        JAR_FILE: nurserystore-catalogue-service-0.0.1-SNAPSHOT.jar
+      dockerfile: Dockerfile
+    image: nurserystore-catalogue-service
+    container_name: nurserystore-catalogue-service
+    hostname: nurserystore-catalogue-service
+    ports:
+      - "6001:6001"
+    networks:
+      - nurserystore-app-network
+    environment:
+      - SERVER_PORT=6001
+      - ZIPKIN_HOST=nurserystore-zipkin:9411
+      - SPRING_PROFILES_ACTIVE=docker
+
+  nurserystore-order-service:
+    build:
+      context: ./nurserystore-order-service
+      args:
+        JAR_FILE: nurserystore-order-service-0.0.1-SNAPSHOT.jar
+      dockerfile: Dockerfile
+    image: nurserystore-order-service
+    container_name: nurserystore-order-service
+    hostname: nurserystore-order-service
+    ports:
+      - "7001:7001"
+    networks:
+      - nurserystore-app-network
+    environment:
+      - SERVER_PORT=7001
+      - ZIPKIN_HOST=nurserystore-zipkin:9411
+      - SPRING_PROFILES_ACTIVE=docker
+
+  nurserystore-payment-service:
+    build:
+      context: ./nurserystore-payment-service
+      args:
+        JAR_FILE: nurserystore-payment-service-0.0.1-SNAPSHOT.jar
+      dockerfile: Dockerfile
+    image: nurserystore-payment-service
+    container_name: nurserystore-payment-service
+    hostname: nurserystore-payment-service
+    ports:
+      - "8001:8001"
+    networks:
+      - nurserystore-app-network
+    environment:
+      - SERVER_PORT=8001
+      - ZIPKIN_HOST=nurserystore-zipkin:9411
+      - SPRING_PROFILES_ACTIVE=docker
+
+#  # Tracing service
+#  nurserystore-zipkin:
+#    image: openzipkin/zipkin
+#    container_name: nurserystore-zipkin
+#    hostname: nurserystore-zipkin
+#    ports:
+#      - "9411:9411"
+#    networks:
+#      - nurserystore-app-network
+#
+#  # Monitoring Services
+#  nurserystore-prometheus:
+#    build:
+#      context: ./nurserystore-prometheus
+#      dockerfile: Dockerfile
+#    image: nurserystore-prometheus
+#    container_name: nurserystore-prometheus
+#    hostname: nurserystore-prometheus
+#    ports:
+#      - "9090:9090"
+#    networks:
+#      - nurserystore-app-network
+#
+#  nurserystore-grafana:
+#    build:
+#      context: ./nurserystore-graphana
+#      dockerfile: Dockerfile
+#    image: graphana
+#    container_name: nurserystore-graphana
+#    hostname: nurserystore-graphana
+#    ports:
+#      - "3030:3000"
+#    volumes:
+#      - nurserystore-graphana-volume:/var/lib/grafana
+#    networks:
+#      - nurserystore-app-network
+#
+#  # Monitoring using TICK stack.
+#  nurserystore-telegraf:
+#    build:
+#      context: ./nurserystore-telegraph
+#      dockerfile: Dockerfile
+#    image: nurserystore-telegraf
+#    container_name: nurserystore-telegraf
+#    hostname: nurserystore-telegraf
+#    environment:
+#      HOSTNAME: "nurserystore-telegraf"
+#    ports:
+#      - "8125:8125/udp"
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#    networks:
+#      - nurserystore-app-network
+#
+#  nurserystore-influxdb:
+#    image: influxdb:1.8
+#    container_name: nurserystore-influxdb
+#    hostname: nurserystore-influxdb
+#    volumes:
+#      - booksture-influxdb-volume:/var/lib/influxdb
+#    ports:
+#      - "8086:8086"
+#    networks:
+#      - nurserystore-app-network
+#
+#  nurserystore-chronograf:
+#    image: chronograf:1.7.3
+#    container_name: nurserystore-chronograf
+#    hostname: nurserystore-chronograf
+#    environment:
+#      INFLUXDB_URL: http://nurserystore-influxdb:8086
+#      KAPACITOR_URL: http://nurserystore-kapacitor:9092
+#    volumes:
+#      - booksture-chronograf-volume:/var/lib/chronograf
+#    ports:
+#      - "8888:8888"
+#    restart: always
+#    networks:
+#      - nurserystore-app-network
+#
+#  nurserystore-kapacitor:
+#    image: kapacitor
+#    container_name: nurserystore-kapacitor
+#    hostname: nurserystore-kapacitor
+#    environment:
+#      KAPACITOR_HOSTNAME: nurserystore-kapacitor
+#      KAPACITOR_INFLUXDB_0_URLS_0: http://nurserystore-influxdb:8086
+#    ports:
+#      - "9092:9092"
+#    networks:
+#      - nurserystore-app-network
+
+volumes:
+  nurserystore-db-volume:
+  nurserystore-graphana-volume:
+  nurserystore-telegraph-volume:
+  nurserystore-influxdb-volume:
+  nurserystore-chronograf-volume:
+
+networks:
+  nurserystore-app-network:
+    driver: bridge
