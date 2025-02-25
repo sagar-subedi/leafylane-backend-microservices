@@ -46,7 +46,6 @@ public class ResourceServerConfig {
                                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/product**/**")).permitAll()
                                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/image/**")).permitAll()
                                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/review/**")).permitAll()
-                                .requestMatchers(PathRequest.toH2Console()).permitAll()
                                 .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(
