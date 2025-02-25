@@ -20,7 +20,7 @@
 
     <modules>
 <!--        <module>nurserystore-commons</module>-->
-        <module>nurserystore-feign</module>
+<!--        <module>nurserystore-feign</module>-->
 <!--        <module>nurserystore-api-gateway-service</module>-->
         <module>nurserystore-eureka-discovery-service</module>
         <module>nurserystore-account-service</module>
@@ -100,26 +100,26 @@
 <!--            <version>3.0.0</version>-->
 <!--        </dependency>-->
 
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-registry-prometheus</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.micrometer</groupId>-->
+<!--            <artifactId>micrometer-registry-prometheus</artifactId>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-core</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.micrometer</groupId>-->
+<!--            <artifactId>micrometer-core</artifactId>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-registry-influx</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.micrometer</groupId>-->
+<!--            <artifactId>micrometer-registry-influx</artifactId>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>net.sf.dozer</groupId>
-            <artifactId>dozer</artifactId>
-            <version>5.5.1</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>net.sf.dozer</groupId>-->
+<!--            <artifactId>dozer</artifactId>-->
+<!--            <version>5.5.1</version>-->
+<!--        </dependency>-->
 
 <!--        <dependency>-->
 <!--            <groupId>io.micrometer</groupId>-->
