@@ -1,5 +1,5 @@
 
-INSERT INTO USER (USER_ID, FIRST_NAME, LAST_NAME, PASSWORD, USER_NAME, EMAIL)  VALUES
+INSERT INTO USERS (USER_ID, FIRST_NAME, LAST_NAME, PASSWORD, USER_NAME, EMAIL)  VALUES
 ('asdasdsa-6727-4229-a4ab-zxczxcxczxcc', 'Subedi', 'Saagar', '$2a$10$2XWkMz42.EApOBnx7nJaSupInwvBfPCGb5HZwWM.2RsC92joeAQzq', 'sagar.subedi', 'john.doe@gmail.com'),
 ('xcvcvbvv-ba5d-4b92-85be-dfgdfgdfgdfg', 'Admin', 'Admin', '$2a$10$br7HrUzeQQ0ddR2ogg7L1.aRQ1sGC1rud.mL8VQBEKaMkx1G5zXR6', 'admin.admin', 'admin@gmail.com'),
 ('rertertr-6727-4229-a4ab-erererererer', 'Subedi', 'Saagar', '$2a$10$2XWkMz42.EApOBnx7nJaSupInwvBfPCGb5HZwWM.2RsC92joeAQzq', 'sagarsubedi01', 'sagarsubedi01@gmail.com'),

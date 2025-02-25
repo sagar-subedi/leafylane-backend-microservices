@@ -21,7 +21,7 @@ import jakarta.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "oauth_client_details")
+@Table(name = "oauth2_client_details")
 @Builder
 public class OAuthClient extends DateAudit {
 

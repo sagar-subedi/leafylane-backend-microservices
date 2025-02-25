@@ -40,7 +40,7 @@ insert into PRODUCT (product_id, created_at, updated_at, available_item_count, p
 ('24', now(), now(), 678, 'Adjustable hose nozzle for easy garden watering', 299, 'Hose Nozzle', '8', '46fb8d5b-2979-4c54-848f-512693b37818__hoseNozzle.webp'),
 ('25', now(), now(), 3545, 'Drip irrigation system for efficient water management', 500, 'Drip Irrigation Kit', '8', '990945b7-900e-432b-9b2c-79ea20302f6e__dripIrrigationKit.webp');
 
-insert into REVIEW (review_id, rating_value, user_id, review_message, product_id, user_name, CREATED_AT, UPDATED_AT) values
+insert into REVIEW (review_id, rating_value, user_id, review_message, product_id, user_name, created_at, updated_at) values
 (1, 4, 1, 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab corporis et ea voluptas laboriosam nesciunt perferendis iste, architecto quae dignissimos. Tempore quod, veritatis quos consequuntur officia est dolore explicabo facilis.', '1', 'sagar', now(), now()),
 (2, 3, 2, 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit aperiam inventore eligendi assumenda accusamus nulla quaerat nostrum vitae officia corporis iure optio esse dicta non ipsam nisi quod ex, totam qui consequuntur iusto minima molestiae eius labore. Nobis similique reiciendis expedita atque velit temporibus exercitationem, eligendi, nisi fuga minus facilis!', '1', 'sagar2', now(), now()),
 (3, 5, 3, 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda, eos?', '3', 'sagar3', now(), now()),
