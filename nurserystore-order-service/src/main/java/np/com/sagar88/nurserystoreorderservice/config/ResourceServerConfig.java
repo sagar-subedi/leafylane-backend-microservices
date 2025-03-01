@@ -1,11 +1,12 @@
 package np.com.sagar88.nurserystoreorderservice.config;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -15,12 +16,13 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 public class ResourceServerConfig {
 
+    @Autowired
+    CustomJwtAuthenticationConverter customJwtAuthenticationConverter;
+
     @Bean
     public SecurityFilterChain getSecurityFilterChain(HttpSecurity http) throws Exception {
 
-        http.csrf(csrfConfigurer ->
-                csrfConfigurer.ignoringRequestMatchers(
-                        PathRequest.toH2Console()));
+        http.csrf(AbstractHttpConfigurer::disable);
 
         http.headers(headersConfigurer ->
                 headersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
@@ -35,11 +37,11 @@ public class ResourceServerConfig {
                                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/product**/**")).permitAll()
                                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/image/**")).permitAll()
                                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/review/**")).permitAll()
-                                .requestMatchers(PathRequest.toH2Console()).permitAll()
                                 .anyRequest().authenticated()
                 )
-                .oauth2ResourceServer()
-                .jwt();
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(
+                        jwt -> jwt.jwtAuthenticationConverter(customJwtAuthenticationConverter)
+                ));
 
         return http.build();
     }
