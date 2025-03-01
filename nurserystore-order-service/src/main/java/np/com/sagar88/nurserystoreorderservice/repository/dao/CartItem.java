@@ -50,6 +50,9 @@ public class CartItem extends DateAudit {
 
     @Column(name = "PRODUCT_NAME", nullable = false)
     private String productName;
+
+    @Column(name = "USER_NAME", nullable = false)
+    private String userName;
     
     @ManyToOne
     @JoinColumn(name = "CART_ID")

@@ -43,6 +43,8 @@ public class Product extends DateAudit {
 
     @Column(name = "PRODUCT_DESCRIPTION")
     private String description;
+
+    @Column(name = "PRICE")
     private double price;
 
     @Column(name = "PRODUCT_IMAGE_ID")

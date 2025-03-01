@@ -54,7 +54,7 @@ public class OrderBillingAddress extends DateAudit {
     private String postalCode;
 
     @Pattern(regexp = "[A-Z]{2}", message = "2-letter ISO country code required")
-    @NonNull
+    @Column(name = "COUNTRY", nullable = false)
     private String country;
 
     @Column(name = "PHONE")

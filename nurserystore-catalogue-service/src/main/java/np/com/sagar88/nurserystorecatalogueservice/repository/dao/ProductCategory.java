@@ -44,5 +44,7 @@ public class ProductCategory extends DateAudit {
             cascade = CascadeType.ALL
     )
     private List<Product> products;
+
+    @Column(name = "DESCRIPTION")
     private String description;
 }
