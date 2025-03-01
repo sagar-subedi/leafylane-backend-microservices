@@ -120,12 +120,6 @@ spring:
     url: jdbc:mysql://nurserystore-mysql-db:3306/nurserystore_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: nurserystoreDBA
     password: PaSSworD
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://nurserystore-auth-server:8080
-          jwk-set-uri: http://nurserystore-auth-server:8080/oauth2/jwks # Add jwkSetUri configuration, resource server will not ping authorization server on startup.
   cloud:
     consul:
       host: nurserystore-consul-discovery

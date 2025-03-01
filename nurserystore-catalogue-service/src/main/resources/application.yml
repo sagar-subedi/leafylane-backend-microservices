@@ -1,10 +1,6 @@
 server:
   port: ${SERVER_PORT:6001}
 
-security:
-  jwt:
-    public-key: classpath:jwt-signing-public-key.txt
-
 spring:
   application:
     name: nurserystore-catalogue-service
