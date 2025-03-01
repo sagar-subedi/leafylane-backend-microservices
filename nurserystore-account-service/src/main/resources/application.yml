@@ -18,12 +18,6 @@ spring:
     baseline-version: 0.9
   main:
     allow-bean-definition-overriding: true
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://127.0.0.1:8080
-          jwk-set-uri: http://127.0.0.1:8080/oauth2/jwks # Add jwkSetUri configuration, resource server will not ping authorization server on startup.
 
 
 logging:
@@ -43,6 +37,26 @@ spring:
   config:
     activate:
       on-profile: local
+#management:
+#  tracing:
+#    sampling:
+#      probability: 1.0
+#  metrics:
+#    export:
+#      statsd:
+#        enabled: true
+#        flavor: telegraf
+#        port: 8125
+#      influx: #pushing influx metrics.
+#        db: nurserystore_influxdb_monitoring_metrics
+#        uri: http://nurserystore-influxdb:8086
+#        auto-create-db: true
+#      prometheus:
+#        enabled: true
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
   cloud:
     bus:
       enabled: false
@@ -68,7 +82,12 @@ spring:
   h2:
     console:
       enabled: true
-
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://127.0.0.1:8080
+          jwk-set-uri: http://127.0.0.1:8080/oauth2/jwks # Add jwkSetUri configuration, resource server will not ping authorization server on startup.
 management:
   influx:
     metrics:
@@ -124,6 +143,12 @@ spring:
     url: jdbc:mysql://nurserystore-mysql-db:3306/nurserystore_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: nurserystoreDBA
     password: PaSSworD
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://nurserystore-auth-server:8080
+          jwk-set-uri: http://nurserystore-auth-server:8080/oauth2/jwks # Add jwkSetUri configuration, resource server will not ping authorization server on startup.
   cloud:
     consul:
       host: nurserystore-consul-discovery
@@ -133,6 +158,9 @@ spring:
       enabled: true #consul discovery is enabled in this profile
 
 management:
+  tracing:
+    sampling:
+      probability: 1.0
   metrics:
     export:
       statsd:
@@ -143,6 +171,8 @@ management:
         db: nurserystore_influxdb_monitoring_metrics
         uri: http://nurserystore-influxdb:8086
         auto-create-db: true
+      prometheus:
+        enabled: true
   endpoints:
     web:
       exposure:

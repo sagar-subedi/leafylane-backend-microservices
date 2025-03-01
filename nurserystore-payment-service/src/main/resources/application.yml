@@ -9,13 +9,6 @@ spring:
     name: nurserystore-payment-service
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:local}
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://127.0.0.1:8080
-          jwk-set-uri: http://127.0.0.1:8080/oauth2/jwks # Add jwkSetUri configuration, resource server will not ping authorization server on startup.
-
   zipkin:
     base-url: http://${ZIPKIN_HOST:localhost:9411}
     enabled: true
@@ -49,6 +42,12 @@ spring:
   config:
     activate:
       on-profile: local
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://127.0.0.1:8080
+          jwk-set-uri: http://127.0.0.1:8080/oauth2/jwks # Add jwkSetUri configuration, resource server will not ping authorization server on startup.
   cloud:
     bus:
       enabled: false
@@ -110,6 +109,12 @@ spring:
   config:
     activate:
       on-profile: docker
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://nurserystore-auth-server:8080
+          jwk-set-uri: http://nurserystore-auth-server:8080/oauth2/jwks # Add jwkSetUri configuration, resource server will not ping authorization server on startup.
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     database: mysql

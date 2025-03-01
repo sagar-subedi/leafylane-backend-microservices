@@ -11,13 +11,6 @@ spring:
     service:
       name: nurserystore-billing-service
     message-timeout: 10
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://127.0.0.1:8080
-          jwk-set-uri: http://127.0.0.1:8080/oauth2/jwks # Add jwkSetUri configuration, resource server will not ping authorization server on startup.
-
   sleuth:
     sampler:
       probability: 1.0
@@ -74,6 +67,12 @@ spring:
       settings:
         web-allow-others: true
       path: /h2-console
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://127.0.0.1:8080
+          jwk-set-uri: http://127.0.0.1:8080/oauth2/jwks # Add jwkSetUri configuration, resource server will not ping authorization server on startup.
 
 ---
 
@@ -133,7 +132,12 @@ spring:
       discovery:
         instanceId: ${spring.application.name}:${random.value}
       enabled: true #consul discovery is enabled in this profile
-
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://nurserystore-auth-server:8080
+          jwk-set-uri: http://nurserystore-auth-server:8080/oauth2/jwks # Add jwkSetUri configuration, resource server will not ping authorization server on startup.
 management:
   metrics:
     export:
