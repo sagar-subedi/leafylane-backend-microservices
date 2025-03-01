@@ -9,10 +9,10 @@ metadata:
   name: nurserystore-mysql-db
 spec:
   ports:
-#    - name: "3306"
-#      port: 3306
-#      targetPort: 3306
-    - name: 3306-tcp
+    - name: "3306"
+      port: 3306
+      targetPort: 3306
+    - name: "3306-tcp"
       port: 3306
       targetPort: 3306
   selector:
