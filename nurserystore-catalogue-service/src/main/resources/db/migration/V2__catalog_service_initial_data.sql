@@ -1,5 +1,5 @@
 
-insert into PRODUCT_CATEGORY (product_category_id, created_at, updated_at, description, product_category_name) values
+INSERT INTO PRODUCT_CATEGORY (PRODUCT_CATEGORY_ID, CREATED_AT, UPDATED_AT, DESCRIPTION, PRODUCT_CATEGORY_NAME) VALUES
  ('1', now(), now(), 'Various types of flowering plants for home and garden', 'Flowering Plants'),
  ('2', now(), now(), 'A collection of vegetable plants and seedlings', 'Vegetable Plants'),
  ('3', now(), now(), 'Essential gardening tools and accessories', 'Gardening Tools'),
@@ -9,7 +9,7 @@ insert into PRODUCT_CATEGORY (product_category_id, created_at, updated_at, descr
  ('7', now(), now(), 'Seeds of different plants, flowers, and vegetables', 'Seeds'),
  ('8', now(), now(), 'Irrigation tools and watering equipment for gardens', 'Watering Equipment');
 
-insert into PRODUCT (product_id, created_at, updated_at, available_item_count, product_description, price, product_name, product_category_id, product_image_id) values
+INSERT INTO PRODUCT (PRODUCT_ID, CREATED_AT, UPDATED_AT, AVAILABLE_ITEM_COUNT, PRODUCT_DESCRIPTION, PRICE, PRODUCT_NAME, PRODUCT_CATEGORY_ID, PRODUCT_IMAGE_ID) VALUES
 ('1', now(), now(), 345, 'Beautiful rose plants with different colors and varieties', 85, 'Rose Plant', '1', 'c16108e1-8276-41ad-bf12-4aee4c0a7e65__rosePlant.webp'),
 ('2', now(), now(), 987, 'Fresh and healthy marigold plants for decoration and gardening', 140, 'Marigold Plant', '1', '2b3ba80b-da93-4206-b50f-83008180a09e__marigoldPlant.webp'),
 ('3', now(), now(), 872, 'Fragrant and vibrant jasmine plant perfect for home gardens', 399, 'Jasmine Plant', '1', '0547ab94-59f8-4352-b17b-0918d07913f2__jasminePlant.webp'),
@@ -40,7 +40,7 @@ insert into PRODUCT (product_id, created_at, updated_at, available_item_count, p
 ('24', now(), now(), 678, 'Adjustable hose nozzle for easy garden watering', 299, 'Hose Nozzle', '8', '46fb8d5b-2979-4c54-848f-512693b37818__hoseNozzle.webp'),
 ('25', now(), now(), 3545, 'Drip irrigation system for efficient water management', 500, 'Drip Irrigation Kit', '8', '990945b7-900e-432b-9b2c-79ea20302f6e__dripIrrigationKit.webp');
 
-insert into REVIEW (review_id, rating_value, user_id, review_message, product_id, user_name, created_at, updated_at) values
+INSERT INTO REVIEW (REVIEW_ID, RATING_VALUE, USER_ID, REVIEW_MESSAGE, PRODUCT_ID, USER_NAME, CREATED_AT, UPDATED_AT) VALUES
 (1, 4, 1, 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ab corporis et ea voluptas laboriosam nesciunt perferendis iste, architecto quae dignissimos. Tempore quod, veritatis quos consequuntur officia est dolore explicabo facilis.', '1', 'sagar', now(), now()),
 (2, 3, 2, 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Suscipit aperiam inventore eligendi assumenda accusamus nulla quaerat nostrum vitae officia corporis iure optio esse dicta non ipsam nisi quod ex, totam qui consequuntur iusto minima molestiae eius labore. Nobis similique reiciendis expedita atque velit temporibus exercitationem, eligendi, nisi fuga minus facilis!', '1', 'sagar2', now(), now()),
 (3, 5, 3, 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda, eos?', '3', 'sagar3', now(), now()),

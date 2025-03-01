@@ -1,38 +1,38 @@
-create table PRODUCT (
-    product_id varchar(255) not null,
-    available_item_count integer not null,
-    product_description varchar(255),
-    price double not null,
-    product_name varchar(255) not null,
-    product_category_id varchar(255),
-    product_image_id varchar(255),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    primary key (product_id)
+CREATE TABLE PRODUCT (
+    PRODUCT_ID VARCHAR(255) NOT NULL,
+    AVAILABLE_ITEM_COUNT INTEGER NOT NULL,
+    PRODUCT_DESCRIPTION VARCHAR(255),
+    PRICE DOUBLE NOT NULL,
+    PRODUCT_NAME VARCHAR(255) NOT NULL,
+    PRODUCT_CATEGORY_ID VARCHAR(255),
+    PRODUCT_IMAGE_ID VARCHAR(255),
+    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UPDATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (PRODUCT_ID)
 );
 
-create table PRODUCT_CATEGORY (
-    product_category_id varchar(255) not null,
-    description varchar(255),
-    product_category_name varchar(255) not null,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    primary key (product_category_id)
+CREATE TABLE PRODUCT_CATEGORY (
+    PRODUCT_CATEGORY_ID VARCHAR(255) NOT NULL,
+    DESCRIPTION VARCHAR(255),
+    PRODUCT_CATEGORY_NAME VARCHAR(255) NOT NULL,
+    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UPDATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (PRODUCT_CATEGORY_ID)
 );
 
-alter table PRODUCT
-    add constraint FKProductToProductCategory
-    foreign key (product_category_id)
-    references PRODUCT_CATEGORY(product_category_id);
+ALTER TABLE PRODUCT
+    ADD CONSTRAINT FK_PRODUCT_TO_PRODUCT_CATEGORY
+    FOREIGN KEY (PRODUCT_CATEGORY_ID)
+    REFERENCES PRODUCT_CATEGORY(PRODUCT_CATEGORY_ID);
 
-create table REVIEW (
-    review_id varchar(255) not null,
-    user_id varchar(255),
-    rating_value double not null,
-    review_message varchar(1000),
-    product_id varchar(255) not null,
-    user_name varchar(255),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    primary key (review_id)
+CREATE TABLE REVIEW (
+    REVIEW_ID VARCHAR(255) NOT NULL,
+    USER_ID VARCHAR(255),
+    RATING_VALUE DOUBLE NOT NULL,
+    REVIEW_MESSAGE VARCHAR(1000),
+    PRODUCT_ID VARCHAR(255) NOT NULL,
+    USER_NAME VARCHAR(255),
+    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UPDATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (REVIEW_ID)
 );
