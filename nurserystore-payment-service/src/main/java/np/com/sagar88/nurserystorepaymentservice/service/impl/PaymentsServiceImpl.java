@@ -40,7 +40,19 @@ public class PaymentsServiceImpl implements PaymentsService {
         String userIdFromToken = getUserIdFromToken(authentication);
         UserPaymentCustomer customer = userPaymentCustomerRepository.findByUserId(userIdFromToken);
 
-        Map<String, Object> params = getStringObjectMap(createPaymentRequest, customer);
+        Map<String, Object> params = new HashMap<>();
+        Map<String, Object> autoPaymentMethods = new HashMap<>();
+        autoPaymentMethods.put("enabled", true);
+        autoPaymentMethods.put("allow_redirects", "never");
+
+
+        params.put("amount", createPaymentRequest.getAmount());
+        params.put("currency", createPaymentRequest.getCurrency());
+        params.put("payment_method", createPaymentRequest.getPaymentMethodId());
+        params.put("customer", customer.getPaymentCustomerId());
+        params.put("confirm", true);
+        params.put("automatic_payment_methods", autoPaymentMethods);
+
 
 
         try {
@@ -72,20 +84,5 @@ public class PaymentsServiceImpl implements PaymentsService {
             throw new RunTimeExceptionPlaceHolder("Error while processing payment!!");
         }
 
-    }
-
-    private static Map<String, Object> getStringObjectMap(CreatePaymentRequest createPaymentRequest, UserPaymentCustomer customer) {
-        Map<String, Object> params = new HashMap<>();
-        Map<String, Object> autoPaymentMethods = new HashMap<>();
-        autoPaymentMethods.put("enabled", true);
-        autoPaymentMethods.put("allow_redirects", "never");
-        
-        params.put("amount", createPaymentRequest.getAmount());
-        params.put("currency", createPaymentRequest.getCurrency());
-        params.put("payment_method", createPaymentRequest.getPaymentMethodId());
-        params.put("customer", customer.getPaymentCustomerId());
-        params.put("confirm", true);
-        params.put("automatic_payment_methods", autoPaymentMethods);
-        return params;
     }
 }

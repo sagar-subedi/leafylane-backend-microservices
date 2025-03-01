@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -171,8 +172,15 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
         params.put("type", "card");
         params.put("card", card);
 
+        //Below params work fine for testing stripe integration
+        Map<String, Object> params2 = new HashMap<>();
+        params2.put("type", "card");
+        params2.put("card", Collections.singletonMap("token", "tok_visa"));
+
+
+
         try {
-            PaymentMethod paymentMethod = PaymentMethod.create(params);
+            PaymentMethod paymentMethod = PaymentMethod.create(params2);
             return paymentMethod.getId();
         } catch (StripeException e) {
             throw new RunTimeExceptionPlaceHolder("Error while setting up payment method.");
