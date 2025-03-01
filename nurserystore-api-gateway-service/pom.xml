@@ -3,17 +3,17 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-<!--	<parent>-->
-<!--		<groupId>np.com.sagar88.nurserystore</groupId>-->
-<!--		<artifactId>nurserystore-application-parent</artifactId>-->
-<!--		<version>0.0.1-SNAPSHOT</version>-->
-<!--	</parent>-->
+		<parent>
+			<groupId>np.com.sagar88.nurserystore</groupId>
+			<artifactId>nurserystore-application-parent</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</parent>
 
-	<parent>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<groupId>org.springframework.boot</groupId>
-		<version>3.1.5</version>
-	</parent>
+<!--	<parent>-->
+<!--		<artifactId>spring-boot-starter-parent</artifactId>-->
+<!--		<groupId>org.springframework.boot</groupId>-->
+<!--		<version>3.1.5</version>-->
+<!--	</parent>-->
 
 	<artifactId>nurserystore-api-gateway-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -32,15 +32,15 @@
 
 
 	<dependencies>
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.cloud</groupId>-->
-<!--			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
 
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.cloud</groupId>-->
-<!--			<artifactId>spring-cloud-starter-consul-discovery</artifactId>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-consul-discovery</artifactId>
+		</dependency>
 		<!--for health check -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -53,78 +53,59 @@
 			<scope>test</scope>
 		</dependency>
 
-<!--		 Spring Boot Starter Web-->
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-webflux</artifactId>-->
-<!--		</dependency>-->
+		<!--		 Spring Boot Starter Web-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.springframework.boot</groupId>-->
+		<!--			<artifactId>spring-boot-starter-webflux</artifactId>-->
+		<!--		</dependency>-->
 
-<!--		 Spring Cloud Gateway-->
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.cloud</groupId>-->
-<!--			<artifactId>spring-cloud-starter-gateway</artifactId>-->
-<!--		</dependency>-->
+		<!--		 Spring Cloud Gateway-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-gateway</artifactId>
+		</dependency>
 
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>-->
-<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.springframework.boot</groupId>-->
+		<!--			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>-->
+		<!--		</dependency>-->
 
-<!--		<dependency>-->
-<!--			<groupId>org.springframework</groupId>-->
-<!--			<artifactId>spring-webflux</artifactId>-->
-<!--			<version>5.3.18</version>-->
-<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.springframework</groupId>-->
+		<!--			<artifactId>spring-webflux</artifactId>-->
+		<!--			<version>5.3.18</version>-->
+		<!--		</dependency>-->
 
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-oauth2-client</artifactId>-->
-<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.springframework.boot</groupId>-->
+		<!--			<artifactId>spring-boot-starter-oauth2-client</artifactId>-->
+		<!--		</dependency>-->
 
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-security</artifactId>-->
-<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.springframework.boot</groupId>-->
+		<!--			<artifactId>spring-boot-starter-security</artifactId>-->
+		<!--		</dependency>-->
 
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.boot</groupId>-->
-<!--			<artifactId>spring-boot-starter-web</artifactId>-->
-<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.springframework.boot</groupId>-->
+		<!--			<artifactId>spring-boot-starter-web</artifactId>-->
+		<!--		</dependency>-->
 
-<!--		<dependency>-->
-<!--			<groupId>io.projectreactor.netty</groupId>-->
-<!--			<artifactId>reactor-netty</artifactId>-->
-<!--			<version>1.0.9</version>-->
-<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>io.projectreactor.netty</groupId>-->
+		<!--			<artifactId>reactor-netty</artifactId>-->
+		<!--			<version>1.0.9</version>-->
+		<!--		</dependency>-->
 
-<!--		<dependency>-->
-<!--			<groupId>io.netty</groupId>-->
-<!--			<artifactId>netty-all</artifactId>-->
-<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>io.netty</groupId>-->
+		<!--			<artifactId>netty-all</artifactId>-->
+		<!--		</dependency>-->
+
 	</dependencies>
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>com.spotify</groupId>
-				<artifactId>dockerfile-maven-plugin</artifactId>
-				<version>1.4.6</version>
-				<executions>
-					<execution>
-						<id>default</id>
-						<goals>
-							<goal>build</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<skip>${skip-docker-plugin}</skip>
-					<repository>${docker-image-name}</repository>
-					<buildArgs>
-						<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
-					</buildArgs>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 
