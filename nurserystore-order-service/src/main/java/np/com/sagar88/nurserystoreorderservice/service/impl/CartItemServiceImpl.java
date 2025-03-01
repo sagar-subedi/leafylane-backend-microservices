@@ -81,6 +81,7 @@ public class CartItemServiceImpl implements CartItemService {
                                     .quantity(cartItemRequest.getQuantity())
                                     .productId(getProductResponse.getProductId())
                                     .productName(getProductResponse.getProductName())
+                                    .userName(userName)
                                     .build();
 
         cartItemRepository.save(cartItem);
