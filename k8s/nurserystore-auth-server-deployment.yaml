@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.35.0 (9532ceef3)
+  labels:
+    io.kompose.service: nurserystore-auth-server
+  name: nurserystore-auth-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: nurserystore-auth-server
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yml
+        kompose.version: 1.35.0 (9532ceef3)
+      labels:
+        io.kompose.service: nurserystore-auth-server
+    spec:
+      containers:
+        - env:
+            - name: SERVER_PORT
+              value: "8080"
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+            - name: ZIPKIN_HOST
+              value: nurserystore-zipkin:9411
+          image: sushilasubedi/nurserystore-auth-server
+          name: nurserystore-auth-server
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+      hostname: nurserystore-auth-server
+      restartPolicy: Always

@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.35.0 (9532ceef3)
+  labels:
+    io.kompose.service: nurserystore-mysql-db
+  name: nurserystore-mysql-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: nurserystore-mysql-db
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yml
+        kompose.version: 1.35.0 (9532ceef3)
+      labels:
+        io.kompose.service: nurserystore-mysql-db
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_DATABASE
+              value: nurserystore_db
+            - name: MYSQL_PASSWORD
+              value: PaSSworD
+            - name: MYSQL_ROOT_PASSWORD
+              value: r00tPaSSworD
+            - name: MYSQL_USER
+              value: nurserystoreDBA
+          image: mysql:8
+          name: nurserystore-mysql-db
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: nurserystore-db-volume
+      hostname: nurserystore-mysql-db
+      restartPolicy: Always
+      volumes:
+        - name: nurserystore-db-volume
+          persistentVolumeClaim:
+            claimName: nurserystore-db-volume
