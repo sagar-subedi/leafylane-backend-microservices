@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: nurserystore
   annotations:
     kompose.cmd: kompose convert -f docker-compose.yml
     kompose.version: 1.35.0 (9532ceef3)
@@ -8,10 +9,11 @@ metadata:
     io.kompose.service: nurserystore-spring-cloud-api-gateway-server
   name: nurserystore-spring-cloud-api-gateway-server
 spec:
-  type: LoadBalancer
   ports:
     - name: "8765"
       port: 8765
       targetPort: 8765
+      nodePort: 30765  # Port on which the service will be available externally
+  type: NodePort
   selector:
     io.kompose.service: nurserystore-spring-cloud-api-gateway-server
