@@ -1,7 +1,8 @@
 MYSQL_USERNAME: "root"
 MYSQL_PASSWORD: "root"
 MYSQL_URL: "jdbc:mysql://localhost:3306/integrated_oauth?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true"
-
+server:
+  port: ${SERVER_PORT:9080}
 spring:
   application:
     name: auth-server

@@ -58,8 +58,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://127.0.0.1:8080
-          jwk-set-uri: http://127.0.0.1:8080/oauth2/jwks # Add jwkSetUri configuration, resource server will not ping authorization server on startup.
+          issuer-uri: http://127.0.0.1:9080
+          jwk-set-uri: http://127.0.0.1:9080/oauth2/jwks # Add jwkSetUri configuration, resource server will not ping authorization server on startup.
   #management:
   #  tracing:
   #    sampling:
@@ -107,8 +107,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://nurserystore-auth-server:8080
-          jwk-set-uri: http://nurserystore-auth-server:8080/oauth2/jwks # Add jwkSetUri configuration, resource server will not ping authorization server on startup.
+          issuer-uri: http://nurserystore-auth-server:9080
+          jwk-set-uri: http://nurserystore-auth-server:9080/oauth2/jwks # Add jwkSetUri configuration, resource server will not ping authorization server on startup.
   cloud:
     consul:
       host: nurserystore-consul-discovery
@@ -146,6 +146,12 @@ spring:
           uri: http://nurserystore-order-service:7001/
           predicates:
             - Path=/api/order/**
+          filters:
+            - StripPrefix=2
+        - id: nurserystore-notification-service
+          uri: http://nurserystore-notification-service:8083
+          predicates:
+            - Path=/api/notification/**
           filters:
             - StripPrefix=2
 management:

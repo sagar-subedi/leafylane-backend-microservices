@@ -66,7 +66,9 @@ public class AuthorizationServerConfig {
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
                 .authorizationGrantType(AuthorizationGrantType.PASSWORD)
-                .redirectUri("http://127.0.0.1:8765/login/oauth2/code/messaging-client-authorization-code")
+               .redirectUri("http://localhost:3000/callback")
+                .redirectUri("https://nursery.sagar88.com.np/callback")
+                .redirectUri("https://oauth.pstmn.io/v1/vscode-callback")
                 .scope("message.read")
                 .clientSettings(ClientSettings.builder()
                         .requireAuthorizationConsent(true)
@@ -100,7 +102,8 @@ public class AuthorizationServerConfig {
     @Bean
     public AuthorizationServerSettings authorizationServerSettings() {
         return AuthorizationServerSettings.builder()
-                .issuer("http://127.0.0.1:8080")
+//                .issuer("http://127.0.0.1:9080")
+                .issuer("http://nurserystore-auth-server:9080")
                 .build();
     }
 

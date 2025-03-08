@@ -59,11 +59,11 @@ services:
     container_name: nurserystore-auth-server
     hostname: nurserystore-auth-server
     ports:
-      - "8080:8080"
+      - "9080:9080"
     networks:
       - nurserystore-app-network
     environment:
-      - SERVER_PORT=8080
+      - SERVER_PORT=9080
       - ZIPKIN_HOST=nurserystore-zipkin:9411
       - SPRING_PROFILES_ACTIVE=docker
 
