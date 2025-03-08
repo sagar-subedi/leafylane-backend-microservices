@@ -158,6 +158,24 @@ services:
       - ZIPKIN_HOST=nurserystore-zipkin:9411
       - SPRING_PROFILES_ACTIVE=docker
 
+  nurserystore-notification-service:
+    build:
+      context: ./nurserystore-notification-service
+      dockerfile: Dockerfile
+    image: sushilasubedi/nurserystore-notification-service
+    container_name: nurserystore-notification-service
+    hostname: nurserystore-notification-service
+    depends_on:
+      - nurserystore-rabbitmq
+    networks:
+      - nurserystore-app-network
+    environment:
+      - RABBITMQ_URL=amqp://user:pass@nurserystore-rabbitmq/
+      - EMAIL_SENDER=youremail@gmail.com
+      - EMAIL_PASSWORD=
+      - EMAIL_RECIPIENT=otheremail@gmail.com
+    ports:
+      - "9001:9001"
   # Monitoring Services
   nurserystore-prometheus:
     build:
@@ -182,6 +200,19 @@ services:
       - "3030:3000"
     volumes:
       - nurserystore-graphana-volume:/var/lib/grafana
+    networks:
+      - nurserystore-app-network
+
+  nurserystore-rabbitmq:
+    image: rabbitmq:3-management
+    container_name: nurserystore-rabbitmq
+    hostname: nurserystore-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"  # Management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: pass
     networks:
       - nurserystore-app-network
 

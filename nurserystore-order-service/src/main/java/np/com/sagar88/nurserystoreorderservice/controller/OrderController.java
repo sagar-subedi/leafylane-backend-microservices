@@ -1,5 +1,6 @@
 package np.com.sagar88.nurserystoreorderservice.controller;
 
+import np.com.sagar88.nurserystoreorderservice.service.NotificationService;
 import np.com.sagar88.nurserystoreorderservice.service.OrderService;
 import np.com.sagar88.nurserystoreorderservice.web.CreateOrderRequest;
 import np.com.sagar88.nurserystoreorderservice.web.CreateOrderResponse;
@@ -26,11 +27,15 @@ public class OrderController {
     
     @Autowired
     OrderService orderService;
+
+    @Autowired
+    NotificationService notificationService;
     
     @PostMapping("/order")
     public ResponseEntity<CreateOrderResponse> createOrder(@RequestBody @Valid CreateOrderRequest createOrderRequest) {
 
         CreateOrderResponse createOrderResponse = orderService.createOrder(createOrderRequest);
+        notificationService.sendNotification("Order created for billing address: " + createOrderResponse.getBillingAddress());
         return ResponseEntity.ok(createOrderResponse);
     }
 
