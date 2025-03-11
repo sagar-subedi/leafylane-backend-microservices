@@ -11,8 +11,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan("np.com.sagar88.leafylanecatalogueservice")
-@EnableFeignClients(basePackages = "np.com.sagar88.leafylanecatalogueservice")
+@ComponentScan("np.com.sagar88.leafylane.catalogueservice")
+@EnableFeignClients(basePackages = "np.com.sagar88.leafylane.catalogueservice")
 public class NurserystoreCatalogueServiceApplication {
 
 	public static void main(String[] args) {
