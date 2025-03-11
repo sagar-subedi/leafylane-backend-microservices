@@ -1,14 +1,14 @@
 services:
 
   # Database
-  nurserystore-mysql-db:
+  leafylane-mysql-db:
     image: mysql:8
-    container_name: nurserystore-mysql-db
-    hostname: nurserystore-mysql-db
+    container_name: leafylane-mysql-db
+    hostname: leafylane-mysql-db
     restart: always
     environment:
-      MYSQL_DATABASE: 'nurserystore_db'
-      MYSQL_USER: 'nurserystoreDBA'
+      MYSQL_DATABASE: 'leafylane_db'
+      MYSQL_USER: 'leafylaneDBA'
       MYSQL_PASSWORD: 'PaSSworD'
       MYSQL_ROOT_PASSWORD: 'r00tPaSSworD'
     ports:
@@ -16,197 +16,197 @@ services:
     expose:
       - "3306"
     volumes:
-      - nurserystore-db-volume:/var/lib/mysql
+      - leafylane-db-volume:/var/lib/mysql
     networks:
-      - nurserystore-app-network
+      - leafylane-app-network
 
   # Core services
-  nurserystore-consul-discovery:
-    hostname: nurserystore-consul-discovery
+  leafylane-consul-discovery:
+    hostname: leafylane-consul-discovery
     image: hashicorp/consul
-    container_name: nurserystore-consul-discovery
+    container_name: leafylane-consul-discovery
     restart: always
     ports:
       - "8500:8500"
     networks:
-      - nurserystore-app-network
+      - leafylane-app-network
 
-  nurserystore-spring-cloud-api-gateway-server:
+  leafylane-spring-cloud-api-gateway-server:
     build:
-      context: ./nurserystore-api-gateway-service
+      context: ./leafylane-api-gateway-service
       args:
-        JAR_FILE: nurserystore-api-gateway-service-0.0.1-SNAPSHOT.jar
+        JAR_FILE: leafylane-api-gateway-service-0.0.1-SNAPSHOT.jar
       dockerfile: Dockerfile
-    image: nurserystore-spring-cloud-api-gateway-server
-    container_name: nurserystore-spring-cloud-api-gateway-server
-    hostname: nurserystore-spring-cloud-api-gateway-server
+    image: leafylane-spring-cloud-api-gateway-server
+    container_name: leafylane-spring-cloud-api-gateway-server
+    hostname: leafylane-spring-cloud-api-gateway-server
     ports:
       - "8765:8765"
     networks:
-      - nurserystore-app-network
+      - leafylane-app-network
     environment:
       - SERVER_PORT=8765
-      - ZIPKIN_HOST=nurserystore-zipkin:9411
+      - ZIPKIN_HOST=leafylane-zipkin:9411
       - SPRING_PROFILES_ACTIVE=docker
 
-  nurserystore-auth-server:
+  leafylane-auth-server:
     build:
-      context: ./nurserystore-oauth2-authorization-server
+      context: ./leafylane-oauth2-authorization-server
       args:
-        JAR_FILE: nurserystore-oauth2-authorization-server-0.0.1-SNAPSHOT.jar
+        JAR_FILE: leafylane-oauth2-authorization-server-0.0.1-SNAPSHOT.jar
       dockerfile: Dockerfile
-    image: nurserystore-auth-server
-    container_name: nurserystore-auth-server
-    hostname: nurserystore-auth-server
+    image: leafylane-auth-server
+    container_name: leafylane-auth-server
+    hostname: leafylane-auth-server
     ports:
       - "9080:9080"
     networks:
-      - nurserystore-app-network
+      - leafylane-app-network
     environment:
       - SERVER_PORT=9080
-      - ZIPKIN_HOST=nurserystore-zipkin:9411
+      - ZIPKIN_HOST=leafylane-zipkin:9411
       - SPRING_PROFILES_ACTIVE=docker
 
 
-  nurserystore-account-service:
+  leafylane-account-service:
     build:
-      context: ./nurserystore-account-service
+      context: ./leafylane-account-service
       args:
-        JAR_FILE: nurserystore-account-service-0.0.1-SNAPSHOT.jar
+        JAR_FILE: leafylane-account-service-0.0.1-SNAPSHOT.jar
       dockerfile: Dockerfile
-    image: nurserystore-account-service
-    container_name: nurserystore-account-service
-    hostname: nurserystore-account-service
+    image: leafylane-account-service
+    container_name: leafylane-account-service
+    hostname: leafylane-account-service
     ports:
       - "4001:4001"
     networks:
-      - nurserystore-app-network
+      - leafylane-app-network
     environment:
       - SERVER_PORT=4001
-      - ZIPKIN_HOST=nurserystore-zipkin:9411
+      - ZIPKIN_HOST=leafylane-zipkin:9411
       - SPRING_PROFILES_ACTIVE=docker
 
-  nurserystore-billing-service:
+  leafylane-billing-service:
     build:
-      context: ./nurserystore-address-service
+      context: ./leafylane-address-service
       args:
-        JAR_FILE: nurserystore-address-service-0.0.1-SNAPSHOT.jar
+        JAR_FILE: leafylane-address-service-0.0.1-SNAPSHOT.jar
       dockerfile: Dockerfile
-    image: nurserystore-address-service
-    container_name: nurserystore-address-service
-    hostname: nurserystore-address-service
+    image: leafylane-address-service
+    container_name: leafylane-address-service
+    hostname: leafylane-address-service
     ports:
       - "5001:5001"
     networks:
-      - nurserystore-app-network
+      - leafylane-app-network
     environment:
       - SERVER_PORT=5001
-      - ZIPKIN_HOST=nurserystore-zipkin:9411
+      - ZIPKIN_HOST=leafylane-zipkin:9411
       - SPRING_PROFILES_ACTIVE=docker
 
-  nurserystore-catalog-service:
+  leafylane-catalog-service:
     build:
-      context: ./nurserystore-catalogue-service
+      context: ./leafylane-catalogue-service
       args:
-        JAR_FILE: nurserystore-catalogue-service-0.0.1-SNAPSHOT.jar
+        JAR_FILE: leafylane-catalogue-service-0.0.1-SNAPSHOT.jar
       dockerfile: Dockerfile
-    image: nurserystore-catalogue-service
-    container_name: nurserystore-catalogue-service
-    hostname: nurserystore-catalogue-service
+    image: leafylane-catalogue-service
+    container_name: leafylane-catalogue-service
+    hostname: leafylane-catalogue-service
     ports:
       - "6001:6001"
     networks:
-      - nurserystore-app-network
+      - leafylane-app-network
     environment:
       - SERVER_PORT=6001
-      - ZIPKIN_HOST=nurserystore-zipkin:9411
+      - ZIPKIN_HOST=leafylane-zipkin:9411
       - SPRING_PROFILES_ACTIVE=docker
 
-  nurserystore-order-service:
+  leafylane-order-service:
     build:
-      context: ./nurserystore-order-service
+      context: ./leafylane-order-service
       args:
-        JAR_FILE: nurserystore-order-service-0.0.1-SNAPSHOT.jar
+        JAR_FILE: leafylane-order-service-0.0.1-SNAPSHOT.jar
       dockerfile: Dockerfile
-    image: nurserystore-order-service
-    container_name: nurserystore-order-service
-    hostname: nurserystore-order-service
+    image: leafylane-order-service
+    container_name: leafylane-order-service
+    hostname: leafylane-order-service
     ports:
       - "7001:7001"
     networks:
-      - nurserystore-app-network
+      - leafylane-app-network
     environment:
       - SERVER_PORT=7001
-      - ZIPKIN_HOST=nurserystore-zipkin:9411
+      - ZIPKIN_HOST=leafylane-zipkin:9411
       - SPRING_PROFILES_ACTIVE=docker
 
-  nurserystore-payment-service:
+  leafylane-payment-service:
     build:
-      context: ./nurserystore-payment-service
+      context: ./leafylane-payment-service
       args:
-        JAR_FILE: nurserystore-payment-service-0.0.1-SNAPSHOT.jar
+        JAR_FILE: leafylane-payment-service-0.0.1-SNAPSHOT.jar
       dockerfile: Dockerfile
-    image: nurserystore-payment-service
-    container_name: nurserystore-payment-service
-    hostname: nurserystore-payment-service
+    image: leafylane-payment-service
+    container_name: leafylane-payment-service
+    hostname: leafylane-payment-service
     ports:
       - "8001:8001"
     networks:
-      - nurserystore-app-network
+      - leafylane-app-network
     environment:
       - SERVER_PORT=8001
-      - ZIPKIN_HOST=nurserystore-zipkin:9411
+      - ZIPKIN_HOST=leafylane-zipkin:9411
       - SPRING_PROFILES_ACTIVE=docker
 
-  nurserystore-notification-service:
+  leafylane-notification-service:
     build:
-      context: ./nurserystore-notification-service
+      context: ./leafylane-notification-service
       dockerfile: Dockerfile
-    image: sushilasubedi/nurserystore-notification-service
-    container_name: nurserystore-notification-service
-    hostname: nurserystore-notification-service
+    image: leafylane-notification-service
+    container_name: leafylane-notification-service
+    hostname: leafylane-notification-service
     depends_on:
-      - nurserystore-rabbitmq
+      - leafylane-rabbitmq
     networks:
-      - nurserystore-app-network
+      - leafylane-app-network
     environment:
-      - RABBITMQ_URL=amqp://user:pass@nurserystore-rabbitmq/
       - EMAIL_SENDER=youremail@gmail.com
       - EMAIL_PASSWORD=
       - EMAIL_RECIPIENT=otheremail@gmail.com
+      - RABBITMQ_URL=amqp://user:pass@leafylane-rabbitmq/
     ports:
       - "9001:9001"
   # Monitoring Services
-  nurserystore-prometheus:
+  leafylane-prometheus:
     build:
-      context: ./nurserystore-prometheus
+      context: ./leafylane-prometheus
       dockerfile: Dockerfile
-    image: nurserystore-prometheus
-    container_name: nurserystore-prometheus
-    hostname: nurserystore-prometheus
+    image: leafylane-prometheus
+    container_name: leafylane-prometheus
+    hostname: leafylane-prometheus
     ports:
       - "9090:9090"
     networks:
-      - nurserystore-app-network
+      - leafylane-app-network
 
-  nurserystore-grafana:
+  leafylane-grafana:
     build:
-      context: ./nurserystore-graphana
+      context: ./leafylane-graphana
       dockerfile: Dockerfile
-    image: graphana
-    container_name: nurserystore-graphana
-    hostname: nurserystore-graphana
+    image: leafylane-graphana
+    container_name: leafylane-graphana
+    hostname: leafylane-graphana
     ports:
       - "3030:3000"
     volumes:
-      - nurserystore-graphana-volume:/var/lib/grafana
+      - leafylane-graphana-volume:/var/lib/grafana
     networks:
-      - nurserystore-app-network
+      - leafylane-app-network
 
-  nurserystore-rabbitmq:
+  leafylane-rabbitmq:
     image: rabbitmq:3-management
-    container_name: nurserystore-rabbitmq
-    hostname: nurserystore-rabbitmq
+    container_name: leafylane-rabbitmq
+    hostname: leafylane-rabbitmq
     ports:
       - "5672:5672"
       - "15672:15672"  # Management UI
@@ -214,70 +214,70 @@ services:
       RABBITMQ_DEFAULT_USER: user
       RABBITMQ_DEFAULT_PASS: pass
     networks:
-      - nurserystore-app-network
+      - leafylane-app-network
 
 #  # Monitoring using TICK stack.
-#  nurserystore-telegraf:
+#  leafylane-telegraf:
 #    build:
-#      context: ./nurserystore-telegraph
+#      context: ./leafylane-telegraph
 #      dockerfile: Dockerfile
-#    image: nurserystore-telegraf
-#    container_name: nurserystore-telegraf
-#    hostname: nurserystore-telegraf
+#    image: leafylane-telegraf
+#    container_name: leafylane-telegraf
+#    hostname: leafylane-telegraf
 #    environment:
-#      HOSTNAME: "nurserystore-telegraf"
+#      HOSTNAME: "leafylane-telegraf"
 #    ports:
 #      - "8125:8125/udp"
 #    volumes:
 #      - /var/run/docker.sock:/var/run/docker.sock
 #    networks:
-#      - nurserystore-app-network
+#      - leafylane-app-network
 #
-#  nurserystore-influxdb:
+#  leafylane-influxdb:
 #    image: influxdb:1.8
-#    container_name: nurserystore-influxdb
-#    hostname: nurserystore-influxdb
+#    container_name: leafylane-influxdb
+#    hostname: leafylane-influxdb
 #    volumes:
-#      - nurserystore-influxdb-volume:/var/lib/influxdb
+#      - leafylane-influxdb-volume:/var/lib/influxdb
 #    ports:
 #      - "8086:8086"
 #    networks:
-#      - nurserystore-app-network
+#      - leafylane-app-network
 #
-#  nurserystore-chronograf:
+#  leafylane-chronograf:
 #    image: chronograf:1.7.3
-#    container_name: nurserystore-chronograf
-#    hostname: nurserystore-chronograf
+#    container_name: leafylane-chronograf
+#    hostname: leafylane-chronograf
 #    environment:
-#      INFLUXDB_URL: http://nurserystore-influxdb:8086
-#      KAPACITOR_URL: http://nurserystore-kapacitor:9092
+#      INFLUXDB_URL: http://leafylane-influxdb:8086
+#      KAPACITOR_URL: http://leafylane-kapacitor:9092
 #    volumes:
-#      - nurserystore-chronograf-volume:/var/lib/chronograf
+#      - leafylane-chronograf-volume:/var/lib/chronograf
 #    ports:
 #      - "8888:8888"
 #    restart: always
 #    networks:
-#      - nurserystore-app-network
+#      - leafylane-app-network
 #
-#  nurserystore-kapacitor:
+#  leafylane-kapacitor:
 #    image: kapacitor
-#    container_name: nurserystore-kapacitor
-#    hostname: nurserystore-kapacitor
+#    container_name: leafylane-kapacitor
+#    hostname: leafylane-kapacitor
 #    environment:
-#      KAPACITOR_HOSTNAME: nurserystore-kapacitor
-#      KAPACITOR_INFLUXDB_0_URLS_0: http://nurserystore-influxdb:8086
+#      KAPACITOR_HOSTNAME: leafylane-kapacitor
+#      KAPACITOR_INFLUXDB_0_URLS_0: http://leafylane-influxdb:8086
 #    ports:
 #      - "9092:9092"
 #    networks:
-#      - nurserystore-app-network
+#      - leafylane-app-network
 
 volumes:
-  nurserystore-db-volume:
-  nurserystore-graphana-volume:
-#  nurserystore-telegraph-volume:
-#  nurserystore-influxdb-volume:
-#  nurserystore-chronograf-volume:
+  leafylane-db-volume:
+  leafylane-graphana-volume:
+#  leafylane-telegraph-volume:
+#  leafylane-influxdb-volume:
+#  leafylane-chronograf-volume:
 
 networks:
-  nurserystore-app-network:
+  leafylane-app-network:
     driver: bridge

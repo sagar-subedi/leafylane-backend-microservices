@@ -8,8 +8,8 @@
         <version>3.1.5</version>
         <relativePath/>
     </parent>
-    <groupId>np.com.sagar88.nurserystore</groupId>
-    <artifactId>nurserystore-application-parent</artifactId>
+    <groupId>np.com.sagar88.leafylane</groupId>
+    <artifactId>leafylane-application-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
@@ -19,16 +19,16 @@
     </properties>
 
     <modules>
-<!--        <module>nurserystore-commons</module>-->
-<!--        <module>nurserystore-feign</module>-->
-        <module>nurserystore-api-gateway-service</module>
-        <module>nurserystore-eureka-discovery-service</module>
-        <module>nurserystore-account-service</module>
-        <module>nurserystore-address-service</module>
-        <module>nurserystore-catalogue-service</module>
-        <module>nurserystore-order-service</module>
-        <module>nurserystore-payment-service</module>
-        <module>nurserystore-oauth2-authorization-server</module>
+<!--        <module>leafylane-commons</module>-->
+<!--        <module>leafylane-feign</module>-->
+        <module>leafylane-api-gateway-service</module>
+        <module>leafylane-eureka-discovery-service</module>
+        <module>leafylane-account-service</module>
+        <module>leafylane-address-service</module>
+        <module>leafylane-catalogue-service</module>
+        <module>leafylane-order-service</module>
+        <module>leafylane-payment-service</module>
+        <module>leafylane-oauth2-authorization-server</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -1,17 +1,17 @@
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: nurserystore
+  namespace: leafylane
   annotations:
     kompose.cmd: kompose convert -f docker-compose.yml
     kompose.version: 1.35.0 (9532ceef3)
   labels:
-    io.kompose.service: nurserystore-order-service
-  name: nurserystore-order-service
+    io.kompose.service: leafylane-order-service
+  name: leafylane-order-service
 spec:
   ports:
     - name: "7001"
       port: 7001
       targetPort: 7001
   selector:
-    io.kompose.service: nurserystore-order-service
+    io.kompose.service: leafylane-order-service

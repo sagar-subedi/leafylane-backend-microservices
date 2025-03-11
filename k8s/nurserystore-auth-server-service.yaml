@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: nurserystore
+  namespace: leafylane
   annotations:
     kompose.cmd: kompose convert -f docker-compose.yml
     kompose.version: 1.35.0 (9532ceef3)
   labels:
-    io.kompose.service: nurserystore-auth-server
-  name: nurserystore-auth-server
+    io.kompose.service: leafylane-auth-server
+  name: leafylane-auth-server
 spec:
   ports:
     - name: "8080"
@@ -16,4 +16,4 @@ spec:
       nodePort: 30080   # Port on which the service will be available externally
   type: NodePort
   selector:
-    io.kompose.service: nurserystore-auth-server
+    io.kompose.service: leafylane-auth-server

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+		<parent>
+			<groupId>np.com.sagar88.leafylane</groupId>
+			<artifactId>leafylane-application-parent</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</parent>
+
+<!--	<parent>-->
+<!--		<artifactId>spring-boot-starter-parent</artifactId>-->
+<!--		<groupId>org.springframework.boot</groupId>-->
+<!--		<version>3.1.5</version>-->
+<!--	</parent>-->
+
+	<artifactId>leafylane-api-gateway-service</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>leafylane-api-gateway-service</name>
+	<description>Discovery Server for Nurserystore App</description>
+
+	<properties>
+		<java.version>17</java.version>
+		<skip-docker-plugin>true</skip-docker-plugin>
+		<docker-image-name>gateway-server</docker-image-name>
+		<version>2.3.4.RELEASE</version>
+		<spring-cloud.version>2022.0.4</spring-cloud.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.source>17</maven.compiler.source>
+	</properties>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-consul-discovery</artifactId>
+		</dependency>
+		<!--for health check -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<!-- Tests-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!--		 Spring Boot Starter Web-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.springframework.boot</groupId>-->
+		<!--			<artifactId>spring-boot-starter-webflux</artifactId>-->
+		<!--		</dependency>-->
+
+		<!--		 Spring Cloud Gateway-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-gateway</artifactId>
+		</dependency>
+
+		<!--		<dependency>-->
+		<!--			<groupId>org.springframework.boot</groupId>-->
+		<!--			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>-->
+		<!--		</dependency>-->
+
+		<!--		<dependency>-->
+		<!--			<groupId>org.springframework</groupId>-->
+		<!--			<artifactId>spring-webflux</artifactId>-->
+		<!--			<version>5.3.18</version>-->
+		<!--		</dependency>-->
+
+		<!--		<dependency>-->
+		<!--			<groupId>org.springframework.boot</groupId>-->
+		<!--			<artifactId>spring-boot-starter-oauth2-client</artifactId>-->
+		<!--		</dependency>-->
+
+		<!--		<dependency>-->
+		<!--			<groupId>org.springframework.boot</groupId>-->
+		<!--			<artifactId>spring-boot-starter-security</artifactId>-->
+		<!--		</dependency>-->
+
+		<!--		<dependency>-->
+		<!--			<groupId>org.springframework.boot</groupId>-->
+		<!--			<artifactId>spring-boot-starter-web</artifactId>-->
+		<!--		</dependency>-->
+
+		<!--		<dependency>-->
+		<!--			<groupId>io.projectreactor.netty</groupId>-->
+		<!--			<artifactId>reactor-netty</artifactId>-->
+		<!--			<version>1.0.9</version>-->
+		<!--		</dependency>-->
+
+		<!--		<dependency>-->
+		<!--			<groupId>io.netty</groupId>-->
+		<!--			<artifactId>netty-all</artifactId>-->
+		<!--		</dependency>-->
+
+	</dependencies>
+
+	<build>
+		<plugins>
+		</plugins>
+	</build>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+</project>
