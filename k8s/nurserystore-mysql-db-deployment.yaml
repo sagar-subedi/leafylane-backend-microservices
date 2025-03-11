@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: nurserystore
+  namespace: leafylane
   annotations:
     kompose.cmd: kompose convert -f docker-compose.yml
     kompose.version: 1.35.0 (9532ceef3)
   labels:
-    io.kompose.service: nurserystore-mysql-db
-  name: nurserystore-mysql-db
+    io.kompose.service: leafylane-mysql-db
+  name: leafylane-mysql-db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: nurserystore-mysql-db
+      io.kompose.service: leafylane-mysql-db
   strategy:
     type: Recreate
   template:
@@ -21,29 +21,29 @@ spec:
         kompose.cmd: kompose convert -f docker-compose.yml
         kompose.version: 1.35.0 (9532ceef3)
       labels:
-        io.kompose.service: nurserystore-mysql-db
+        io.kompose.service: leafylane-mysql-db
     spec:
       containers:
         - env:
             - name: MYSQL_DATABASE
-              value: nurserystore_db
+              value: leafylane_db
             - name: MYSQL_PASSWORD
               value: PaSSworD
             - name: MYSQL_ROOT_PASSWORD
               value: r00tPaSSworD
             - name: MYSQL_USER
-              value: nurserystoreDBA
+              value: leafylaneDBA
           image: mysql:8
-          name: nurserystore-mysql-db
+          name: leafylane-mysql-db
           ports:
             - containerPort: 3306
               protocol: TCP
           volumeMounts:
             - mountPath: /var/lib/mysql
-              name: nurserystore-db-volume
-      hostname: nurserystore-mysql-db
+              name: leafylane-db-volume
+      hostname: leafylane-mysql-db
       restartPolicy: Always
       volumes:
-        - name: nurserystore-db-volume
+        - name: leafylane-db-volume
           persistentVolumeClaim:
-            claimName: nurserystore-db-volume
+            claimName: leafylane-db-volume

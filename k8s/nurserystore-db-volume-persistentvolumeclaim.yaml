@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  namespace: nurserystore
+  namespace: leafylane
   labels:
-    io.kompose.service: nurserystore-db-volume
-  name: nurserystore-db-volume
+    io.kompose.service: leafylane-db-volume
+  name: leafylane-db-volume
 spec:
   accessModes:
     - ReadWriteOnce

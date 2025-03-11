@@ -1,0 +1,172 @@
+server:
+  port: ${SERVER_PORT:7001}
+
+spring:
+  application:
+    name: leafylane-order-service
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+  zipkin:
+    base-url: http://${ZIPKIN_HOST:localhost:9411}
+    enabled: true
+    service:
+      name: leafylane-order-service
+    message-timeout: 10
+  sleuth:
+    sampler:
+      probability: 1.0
+  flyway:
+    table: order_service_flyway_history
+    baseline-on-migrate: true
+    baseline-version: 0.9
+  main:
+    allow-bean-definition-overriding: true
+
+logging:
+  level:
+    np.com.sagar88.*: DEBUG
+
+management:
+  endpoint:
+    hystrix:
+      stream:
+        enabled: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://127.0.0.1:9080
+          jwk-set-uri: http://127.0.0.1:9080/oauth2/jwks # Add jwkSetUri configuration, resource server will not ping authorization server on startup.
+  cloud:
+    bus:
+      enabled: false
+    consul:
+      enabled: false #consul discovery set false, in this profile eureka discovery is enabled.
+  jpa:
+    database: h2
+    open-in-view: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:leafylane_db;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+      path: /h2-console
+#  rabbitmq:
+#    host: rabbitmq
+#    port: 5672
+#    username: user
+#    password: pass
+rabbitmq:
+  queue:
+    name: notification_queue
+---
+
+spring:
+  config:
+    activate:
+      on-profile: mysql
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    database: mysql
+    open-in-view: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/leafylane_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: root
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: docker
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://leafylane-auth-server:9080
+          jwk-set-uri: http://leafylane-auth-server:9080/oauth2/jwks # Add jwkSetUri configuration, resource server will not ping authorization server on startup.
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    database: mysql
+    open-in-view: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://leafylane-mysql-db:3306/leafylane_db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: leafylaneDBA
+    password: PaSSworD
+  cloud:
+    consul:
+      host: leafylane-consul-discovery
+      port: 8500
+      discovery:
+        instanceId: ${spring.application.name}:${random.value}
+      enabled: true #consul discovery is enabled in this profile
+  rabbitmq:
+    host: leafylane-rabbitmq
+    port: 5672
+    username: user
+    password: pass
+rabbitmq:
+  queue:
+    name: notification_queue
+
+management:
+  metrics:
+    export:
+      statsd:
+        enabled: true
+        flavor: telegraf
+        port: 8125
+      influx: #pushing influx metrics.
+        db: leafylane_influxdb_monitoring_metrics
+        uri: http://leafylane-influxdb:8086
+        auto-create-db: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+eureka:
+  client:
+    enabled: false #eureka discovery set false, in this profile consul discovery is enabled.

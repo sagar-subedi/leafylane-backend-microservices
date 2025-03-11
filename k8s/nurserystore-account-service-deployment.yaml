@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: nurserystore
+  namespace: leafylane
   annotations:
     kompose.cmd: kompose convert -f docker-compose.yml
     kompose.version: 1.35.0 (9532ceef3)
   labels:
-    io.kompose.service: nurserystore-account-service
-  name: nurserystore-account-service
+    io.kompose.service: leafylane-account-service
+  name: leafylane-account-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: nurserystore-account-service
+      io.kompose.service: leafylane-account-service
   template:
     metadata:
       annotations:
         kompose.cmd: kompose convert -f docker-compose.yml
         kompose.version: 1.35.0 (9532ceef3)
       labels:
-        io.kompose.service: nurserystore-account-service
+        io.kompose.service: leafylane-account-service
     spec:
       containers:
         - env:
@@ -28,11 +28,11 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: docker
             - name: ZIPKIN_HOST
-              value: nurserystore-zipkin:9411
-          image: sushilasubedi/nurserystore-account-service:latest
-          name: nurserystore-account-service
+              value: leafylane-zipkin:9411
+          image: sushilasubedi/leafylane-account-service:latest
+          name: leafylane-account-service
           ports:
             - containerPort: 4001
               protocol: TCP
-      hostname: nurserystore-account-service
+      hostname: leafylane-account-service
       restartPolicy: Always
