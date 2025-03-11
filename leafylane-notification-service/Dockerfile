@@ -11,5 +11,6 @@ RUN apk add --no-cache libc6-compat
 
 COPY --from=builder /notification-service/leafylane-notification-service-bin-0 .
 
-# Run the service
-CMD ["./leafylane-notification-service-bin-0"]
+COPY dockerize /usr/local/bin/dockerize
+
+CMD ["dockerize", "-wait", "tcp://leafylane-rabbitmq:5672", "-timeout", "15m", "./leafylane-notification-service-bin-0"]
