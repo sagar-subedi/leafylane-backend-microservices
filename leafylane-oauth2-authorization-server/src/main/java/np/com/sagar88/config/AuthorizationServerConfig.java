@@ -29,7 +29,9 @@ import org.springframework.security.oauth2.server.authorization.settings.Authori
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
 import org.springframework.security.oauth2.server.authorization.settings.OAuth2TokenFormat;
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
+import org.springframework.security.oauth2.server.authorization.token.DelegatingOAuth2TokenGenerator;
 import org.springframework.security.oauth2.server.authorization.token.JwtGenerator;
+import org.springframework.security.oauth2.server.authorization.token.OAuth2RefreshTokenGenerator;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
@@ -37,8 +39,8 @@ import org.springframework.security.web.authentication.LoginUrlAuthenticationEnt
 import java.time.Duration;
 
 /**
- * @author: ReLive
- * @date: 2021/12/13 12:18 下午
+ * @author: Sagar Subedi
+ * @date: 2025/04/14
  */
 @Configuration(proxyBeanMethods = false)
 public class AuthorizationServerConfig {
@@ -56,8 +58,8 @@ public class AuthorizationServerConfig {
     @Bean
     public RegisteredClientRepository registeredClientRepository(JdbcTemplate jdbcTemplate) {
         RegisteredClient registeredClient = RegisteredClient.withId("1")
-                .clientId("relive-client")
-                .clientSecret("{noop}relive-client")
+                .clientId("leafylane-client")
+                .clientSecret("{noop}leafylane-client")
                 .clientAuthenticationMethods(s -> {
                     s.add(ClientAuthenticationMethod.CLIENT_SECRET_POST);
                     s.add(ClientAuthenticationMethod.CLIENT_SECRET_BASIC);
@@ -67,9 +69,10 @@ public class AuthorizationServerConfig {
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
                 .authorizationGrantType(AuthorizationGrantType.PASSWORD)
                .redirectUri("http://localhost:3000/callback")
-                .redirectUri("https://nursery.sagar88.com.np/callback")
+                .redirectUri("https://leafylane.sagar88.com.np/callback")
                 .redirectUri("https://oauth.pstmn.io/v1/vscode-callback")
-                .scope("message.read")
+                .scope("store.shop")
+                .scope("offline_access")
                 .clientSettings(ClientSettings.builder()
                         .requireAuthorizationConsent(true)
                         .requireProofKey(false)
@@ -78,7 +81,7 @@ public class AuthorizationServerConfig {
                         .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED)
                         .idTokenSignatureAlgorithm(SignatureAlgorithm.RS256)
                         .accessTokenTimeToLive(Duration.ofSeconds(30 * 60))
-                        .refreshTokenTimeToLive(Duration.ofSeconds(60 * 60))
+                        .refreshTokenTimeToLive(Duration.ofSeconds(60 * 60* 24))
                         .reuseRefreshTokens(true)
                         .build())
                 .build();
@@ -118,7 +121,15 @@ public class AuthorizationServerConfig {
     public OAuth2TokenGenerator<?> tokenGenerator(JwtEncoder jwtEncoder, CustomTokenCustomizer customTokenCustomizer) {
         JwtGenerator jwtGenerator = new JwtGenerator(jwtEncoder);
         jwtGenerator.setJwtCustomizer(customTokenCustomizer); // Set the customizer
-        return jwtGenerator;
+
+        // Create a refresh token generator
+        OAuth2RefreshTokenGenerator refreshTokenGenerator = new OAuth2RefreshTokenGenerator();
+
+        // Combine both generators
+        return new DelegatingOAuth2TokenGenerator(
+                jwtGenerator,
+                refreshTokenGenerator
+        );
     }
 
     @Bean

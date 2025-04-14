@@ -15,7 +15,7 @@ import java.util.Map;
  */
 @RestController
 public class CatalogController {
-    @PreAuthorize("hasAuthority('SCOPE_message.read')")
+    @PreAuthorize("hasAuthority('SCOPE_store.shop')")
     @GetMapping("/resource/test")
     public Map<String, Object> getArticles(@AuthenticationPrincipal Jwt jwt) {
         return Collections.singletonMap("Resource Server from catalogue service", jwt.getClaims());
