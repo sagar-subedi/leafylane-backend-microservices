@@ -24,17 +24,17 @@ spec:
         io.kompose.service: leafylane-grafana
     spec:
       containers:
-        - image: sushilasubedi/leafylane-graphana
-          name: leafylane-graphana
+        - image: sushilasubedi/leafylane-grafana
+          name: leafylane-grafana
           ports:
             - containerPort: 3000
               protocol: TCP
           volumeMounts:
             - mountPath: /var/lib/grafana
-              name: leafylane-graphana-volume
-      hostname: leafylane-graphana
+              name: leafylane-grafana-volume
+      hostname: leafylane-grafana
       restartPolicy: Always
       volumes:
-        - name: leafylane-graphana-volume
+        - name: leafylane-grafana-volume
           persistentVolumeClaim:
-            claimName: leafylane-graphana-volume
+            claimName: leafylane-grafana-volume
