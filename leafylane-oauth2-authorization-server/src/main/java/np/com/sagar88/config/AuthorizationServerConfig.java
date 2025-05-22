@@ -86,8 +86,38 @@ public class AuthorizationServerConfig {
                         .build())
                 .build();
 
+
+        RegisteredClient registeredClientSpa = RegisteredClient.withId("2")
+                .clientId("leafylane-client-spa")
+                .clientSecret("{noop}leafylane-client-spa")
+                .clientAuthenticationMethods(s -> {
+                    s.add(ClientAuthenticationMethod.NONE);
+                })
+                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+                .authorizationGrantType(AuthorizationGrantType.PASSWORD)
+                .redirectUri("http://localhost:3000/callback")
+                .redirectUri("https://leafylane.sagar88.com.np/callback")
+                .redirectUri("https://oauth.pstmn.io/v1/vscode-callback")
+                .scope("store.shop")
+                .scope("offline_access")
+                .clientSettings(ClientSettings.builder()
+                        .requireAuthorizationConsent(false)
+                        .requireProofKey(true)
+                        .build())
+                .tokenSettings(TokenSettings.builder()
+                        .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED)
+                        .idTokenSignatureAlgorithm(SignatureAlgorithm.RS256)
+                        .accessTokenTimeToLive(Duration.ofSeconds(30 * 60))
+                        .refreshTokenTimeToLive(Duration.ofSeconds(60 * 60* 24))
+                        .reuseRefreshTokens(true)
+                        .build())
+                .build();
+
         JdbcRegisteredClientRepository registeredClientRepository = new JdbcRegisteredClientRepository(jdbcTemplate);
         registeredClientRepository.save(registeredClient);
+        registeredClientRepository.save(registeredClientSpa);
 
         return registeredClientRepository;
     }
@@ -123,7 +153,7 @@ public class AuthorizationServerConfig {
         jwtGenerator.setJwtCustomizer(customTokenCustomizer); // Set the customizer
 
         // Create a refresh token generator
-        OAuth2RefreshTokenGenerator refreshTokenGenerator = new OAuth2RefreshTokenGenerator();
+        CustomOAuth2RefreshTokenGenerator refreshTokenGenerator = new CustomOAuth2RefreshTokenGenerator();
 
         // Combine both generators
         return new DelegatingOAuth2TokenGenerator(
