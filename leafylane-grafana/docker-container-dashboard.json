@@ -4467,8 +4467,8 @@
       "scopedVars": {
         "Container": {
           "selected": false,
-          "text": "leafylane-graphana",
-          "value": "leafylane-graphana"
+          "text": "leafylane-grafana",
+          "value": "leafylane-grafana"
         }
       },
       "title": "$Container",
@@ -4515,8 +4515,8 @@
       "scopedVars": {
         "Container": {
           "selected": false,
-          "text": "leafylane-graphana",
-          "value": "leafylane-graphana"
+          "text": "leafylane-grafana",
+          "value": "leafylane-grafana"
         }
       },
       "seriesOverrides": [],
@@ -4658,8 +4658,8 @@
       "scopedVars": {
         "Container": {
           "selected": false,
-          "text": "leafylane-graphana",
-          "value": "leafylane-graphana"
+          "text": "leafylane-grafana",
+          "value": "leafylane-grafana"
         }
       },
       "seriesOverrides": [],
@@ -4851,8 +4851,8 @@
       "scopedVars": {
         "Container": {
           "selected": false,
-          "text": "leafylane-graphana",
-          "value": "leafylane-graphana"
+          "text": "leafylane-grafana",
+          "value": "leafylane-grafana"
         }
       },
       "seriesOverrides": [],
@@ -4994,8 +4994,8 @@
       "scopedVars": {
         "Container": {
           "selected": false,
-          "text": "leafylane-graphana",
-          "value": "leafylane-graphana"
+          "text": "leafylane-grafana",
+          "value": "leafylane-grafana"
         }
       },
       "seriesOverrides": [],

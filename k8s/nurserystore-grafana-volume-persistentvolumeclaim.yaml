@@ -3,8 +3,8 @@ kind: PersistentVolumeClaim
 metadata:
   namespace: leafylane
   labels:
-    io.kompose.service: leafylane-graphana-volume
-  name: leafylane-graphana-volume
+    io.kompose.service: leafylane-grafana-volume
+  name: leafylane-grafana-volume
 spec:
   accessModes:
     - ReadWriteOnce

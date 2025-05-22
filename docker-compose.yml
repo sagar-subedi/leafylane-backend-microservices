@@ -191,15 +191,15 @@ services:
 
   leafylane-grafana:
     build:
-      context: ./leafylane-graphana
+      context: ./leafylane-grafana
       dockerfile: Dockerfile
-    image: leafylane-graphana
-    container_name: leafylane-graphana
-    hostname: leafylane-graphana
+    image: leafylane-grafana
+    container_name: leafylane-grafana
+    hostname: leafylane-grafana
     ports:
       - "3030:3000"
     volumes:
-      - leafylane-graphana-volume:/var/lib/grafana
+      - leafylane-grafana-volume:/var/lib/grafana
     networks:
       - leafylane-app-network
 
@@ -273,7 +273,7 @@ services:
 
 volumes:
   leafylane-db-volume:
-  leafylane-graphana-volume:
+  leafylane-grafana-volume:
 #  leafylane-telegraph-volume:
 #  leafylane-influxdb-volume:
 #  leafylane-chronograf-volume:

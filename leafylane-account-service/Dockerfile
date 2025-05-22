@@ -1,5 +1,4 @@
-FROM openjdk:17-alpine
-
+FROM eclipse-temurin:17-jdk-jammy
 VOLUME /tmp
 
 ARG JAR_FILE
