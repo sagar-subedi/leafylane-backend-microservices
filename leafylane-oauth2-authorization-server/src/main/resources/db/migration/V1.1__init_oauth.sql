@@ -61,3 +61,26 @@ CREATE TABLE oauth2_registered_client
     token_settings                varchar(2000)                           NOT NULL,
     PRIMARY KEY (id)
 );
+
+CREATE TABLE users (
+    id CHAR(36) PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE user_roles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id CHAR(36) NOT NULL,
+    role VARCHAR(50) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Seed initial users
+INSERT INTO users (id, username, password) VALUES
+('xcvcvbvv-ba5d-4b92-85be-dfgdfgdfgdfg', 'admin.admin', '{noop}password'),
+('rertertr-6727-4229-a4ab-erererererer', 'sagarsubedi01', '{noop}password');
+
+-- Seed roles for users
+INSERT INTO user_roles (user_id, role) VALUES
+('xcvcvbvv-ba5d-4b92-85be-dfgdfgdfgdfg', 'ROLE_ADMIN'),
+('rertertr-6727-4229-a4ab-erererererer', 'ROLE_STANDARD_USER');
