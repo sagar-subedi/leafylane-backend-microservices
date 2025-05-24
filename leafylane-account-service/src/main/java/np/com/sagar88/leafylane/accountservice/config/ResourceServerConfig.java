@@ -39,6 +39,7 @@ public class ResourceServerConfig {
                                 .requestMatchers(AntPathRequestMatcher.antMatcher("/api-docs/**")).permitAll()
                                 .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
                                 .requestMatchers(AntPathRequestMatcher.antMatcher("/signin")).permitAll()
+                                .requestMatchers(AntPathRequestMatcher.antMatcher("/signup")).permitAll()
                                 .requestMatchers(AntPathRequestMatcher.antMatcher("/test")).permitAll()
                                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.POST, "/oauth2/token")).permitAll()
                                 .requestMatchers(AntPathRequestMatcher.antMatcher(HttpMethod.GET, "/product**/**")).permitAll()
