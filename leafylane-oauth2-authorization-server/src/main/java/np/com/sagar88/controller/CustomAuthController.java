@@ -131,28 +131,4 @@ public class CustomAuthController {
         }
         return builder.build();
     }
-
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestParam String username, @RequestParam String password) {
-        // Check if the username already exists
-        String checkUserQuery = "SELECT COUNT(*) FROM users WHERE username = ?";
-        Integer count = jdbcTemplate.queryForObject(checkUserQuery, Integer.class, username);
-        if (count != null && count > 0) {
-            return ResponseEntity.badRequest().body("Username already exists");
-        }
-
-        // Generate a new UUID for the user
-        String userId = UUID.randomUUID().toString();
-
-        // Insert the new user into the users table
-        String insertUserQuery = "INSERT INTO users (id, username, password) VALUES (?, ?, ?)";
-        jdbcTemplate.update(insertUserQuery, userId, username, "{noop}" + password);
-
-        // Assign the "ROLE_STANDARD_USER" role to the new user
-        String insertRoleQuery = "INSERT INTO user_roles (user_id, role) VALUES (?, ?)";
-        jdbcTemplate.update(insertRoleQuery, userId, "ROLE_STANDARD_USER");
-
-        return ResponseEntity.ok("User registered successfully");
-    }
-
 }
