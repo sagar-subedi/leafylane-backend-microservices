@@ -23,11 +23,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // Query user details
-        String userQuery = "SELECT id, username, password FROM users WHERE username = ?";
+        String userQuery = "SELECT USER_ID, USER_NAME, PASSWORD FROM USERS WHERE USER_NAME = ?";
         var user = jdbcTemplate.queryForObject(userQuery, (rs, rowNum) -> new CustomUserDetails(
-                rs.getString("id"),
-                rs.getString("username"),
-                rs.getString("password"),
+                rs.getString("USER_ID"),
+                rs.getString("USER_NAME"),
+                rs.getString("PASSWORD"),
                 List.of() // Placeholder for authorities
         ), username);
 
@@ -36,10 +36,10 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
 
         // Query user roles
-        String rolesQuery = "SELECT role FROM user_roles WHERE user_id = ?";
+        String rolesQuery = "SELECT r.ROLE_NAME FROM USER_ROLES u inner join ROLE r on u.ROLE_ID  = r.ROLE_ID WHERE u.USER_ID = ?";
         List<GrantedAuthority> authorities = jdbcTemplate.query(rolesQuery, (rs, rowNum) ->
 
-                new SimpleGrantedAuthority(rs.getString("role")));
+                new SimpleGrantedAuthority(rs.getString("ROLE_NAME")), user.getUserId());
 
         return new CustomUserDetails(user.getUserId(), user.getUsername(), user.getPassword(), authorities);
     }
