@@ -3,7 +3,6 @@ package np.com.sagar88.controller;
 import np.com.sagar88.config.CustomUserDetails;
 import np.com.sagar88.config.CustomUserDetailsService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
@@ -36,13 +35,11 @@ public class CustomAuthController {
     private final OAuth2AuthorizationService authorizationService;
     private final RegisteredClientRepository registeredClientRepository;
     private final CustomUserDetailsService customUserDetailsService;
-    private final JdbcTemplate jdbcTemplate;
 
-    public CustomAuthController(OAuth2AuthorizationService authorizationService, RegisteredClientRepository registeredClientRepository, CustomUserDetailsService customUserDetailsService, JdbcTemplate jdbcTemplate) {
+    public CustomAuthController(OAuth2AuthorizationService authorizationService, RegisteredClientRepository registeredClientRepository, CustomUserDetailsService customUserDetailsService) {
         this.authorizationService = authorizationService;
         this.registeredClientRepository = registeredClientRepository;
         this.customUserDetailsService = customUserDetailsService;
-        this.jdbcTemplate = jdbcTemplate;
     }
 
     @PostMapping("/login")

@@ -61,4 +61,3 @@ CREATE TABLE oauth2_registered_client
     token_settings                varchar(2000)                           NOT NULL,
     PRIMARY KEY (id)
 );
-
