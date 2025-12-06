@@ -46,7 +46,7 @@ services:
       - leafylane-app-network
     environment:
       - SERVER_PORT=8765
-      - ZIPKIN_HOST=leafylane-zipkin:9411
+      - MANAGEMENT_OTLP_TRACING_ENDPOINT=http://leafylane-tempo:4318/v1/traces
       - SPRING_PROFILES_ACTIVE=docker
 
   leafylane-auth-server:
@@ -64,9 +64,8 @@ services:
       - leafylane-app-network
     environment:
       - SERVER_PORT=9080
-      - ZIPKIN_HOST=leafylane-zipkin:9411
+      - MANAGEMENT_OTLP_TRACING_ENDPOINT=http://leafylane-tempo:4318/v1/traces
       - SPRING_PROFILES_ACTIVE=docker
-
 
   leafylane-account-service:
     build:
@@ -83,7 +82,7 @@ services:
       - leafylane-app-network
     environment:
       - SERVER_PORT=4001
-      - ZIPKIN_HOST=leafylane-zipkin:9411
+      - MANAGEMENT_OTLP_TRACING_ENDPOINT=http://leafylane-tempo:4318/v1/traces
       - SPRING_PROFILES_ACTIVE=docker
 
   leafylane-billing-service:
@@ -101,7 +100,7 @@ services:
       - leafylane-app-network
     environment:
       - SERVER_PORT=5001
-      - ZIPKIN_HOST=leafylane-zipkin:9411
+      - MANAGEMENT_OTLP_TRACING_ENDPOINT=http://leafylane-tempo:4318/v1/traces
       - SPRING_PROFILES_ACTIVE=docker
 
   leafylane-catalog-service:
@@ -119,7 +118,7 @@ services:
       - leafylane-app-network
     environment:
       - SERVER_PORT=6001
-      - ZIPKIN_HOST=leafylane-zipkin:9411
+      - MANAGEMENT_OTLP_TRACING_ENDPOINT=http://leafylane-tempo:4318/v1/traces
       - SPRING_PROFILES_ACTIVE=docker
 
   leafylane-order-service:
@@ -137,7 +136,7 @@ services:
       - leafylane-app-network
     environment:
       - SERVER_PORT=7001
-      - ZIPKIN_HOST=leafylane-zipkin:9411
+      - MANAGEMENT_OTLP_TRACING_ENDPOINT=http://leafylane-tempo:4318/v1/traces
       - SPRING_PROFILES_ACTIVE=docker
 
   leafylane-payment-service:
@@ -155,7 +154,7 @@ services:
       - leafylane-app-network
     environment:
       - SERVER_PORT=8001
-      - ZIPKIN_HOST=leafylane-zipkin:9411
+      - MANAGEMENT_OTLP_TRACING_ENDPOINT=http://leafylane-tempo:4318/v1/traces
       - SPRING_PROFILES_ACTIVE=docker
 
   leafylane-notification-service:
@@ -189,17 +188,60 @@ services:
     networks:
       - leafylane-app-network
 
+  leafylane-tempo:
+    image: grafana/tempo:latest
+    container_name: leafylane-tempo
+    hostname: leafylane-tempo
+    user: "0"
+    command: [ "-config.file=/etc/tempo.yaml" ]
+    volumes:
+      - ./config/tempo-config.yml:/etc/tempo.yaml
+      - leafylane-tempo-volume:/tmp/tempo
+    ports:
+      - "3200:3200"
+      - "4317:4317" # OTLP gRPC
+      - "4318:4318" # OTLP HTTP
+    networks:
+      - leafylane-app-network
+
+  leafylane-loki:
+    image: grafana/loki:latest
+    container_name: leafylane-loki
+    hostname: leafylane-loki
+    user: "0"
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    volumes:
+      - ./config/loki-config.yml:/etc/loki/local-config.yaml
+      - leafylane-loki-volume:/tmp/loki
+    networks:
+      - leafylane-app-network
+
+  leafylane-promtail:
+    image: grafana/promtail:latest
+    container_name: leafylane-promtail
+    hostname: leafylane-promtail
+    volumes:
+      - /var/lib/docker/containers:/var/lib/docker/containers
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./config/promtail-config.yml:/etc/promtail/config.yml
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - leafylane-app-network
+
   leafylane-grafana:
-    build:
-      context: ./leafylane-grafana
-      dockerfile: Dockerfile
-    image: leafylane-grafana
+    image: grafana/grafana:latest
     container_name: leafylane-grafana
     hostname: leafylane-grafana
     ports:
       - "3030:3000"
     volumes:
       - leafylane-grafana-volume:/var/lib/grafana
+      - ./config/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
     networks:
       - leafylane-app-network
 
@@ -209,74 +251,18 @@ services:
     hostname: leafylane-rabbitmq
     ports:
       - "5672:5672"
-      - "15672:15672"  # Management UI
+      - "15672:15672" # Management UI
     environment:
       RABBITMQ_DEFAULT_USER: user
       RABBITMQ_DEFAULT_PASS: pass
     networks:
       - leafylane-app-network
 
-#  # Monitoring using TICK stack.
-#  leafylane-telegraf:
-#    build:
-#      context: ./leafylane-telegraph
-#      dockerfile: Dockerfile
-#    image: leafylane-telegraf
-#    container_name: leafylane-telegraf
-#    hostname: leafylane-telegraf
-#    environment:
-#      HOSTNAME: "leafylane-telegraf"
-#    ports:
-#      - "8125:8125/udp"
-#    volumes:
-#      - /var/run/docker.sock:/var/run/docker.sock
-#    networks:
-#      - leafylane-app-network
-#
-#  leafylane-influxdb:
-#    image: influxdb:1.8
-#    container_name: leafylane-influxdb
-#    hostname: leafylane-influxdb
-#    volumes:
-#      - leafylane-influxdb-volume:/var/lib/influxdb
-#    ports:
-#      - "8086:8086"
-#    networks:
-#      - leafylane-app-network
-#
-#  leafylane-chronograf:
-#    image: chronograf:1.7.3
-#    container_name: leafylane-chronograf
-#    hostname: leafylane-chronograf
-#    environment:
-#      INFLUXDB_URL: http://leafylane-influxdb:8086
-#      KAPACITOR_URL: http://leafylane-kapacitor:9092
-#    volumes:
-#      - leafylane-chronograf-volume:/var/lib/chronograf
-#    ports:
-#      - "8888:8888"
-#    restart: always
-#    networks:
-#      - leafylane-app-network
-#
-#  leafylane-kapacitor:
-#    image: kapacitor
-#    container_name: leafylane-kapacitor
-#    hostname: leafylane-kapacitor
-#    environment:
-#      KAPACITOR_HOSTNAME: leafylane-kapacitor
-#      KAPACITOR_INFLUXDB_0_URLS_0: http://leafylane-influxdb:8086
-#    ports:
-#      - "9092:9092"
-#    networks:
-#      - leafylane-app-network
-
 volumes:
   leafylane-db-volume:
   leafylane-grafana-volume:
-#  leafylane-telegraph-volume:
-#  leafylane-influxdb-volume:
-#  leafylane-chronograf-volume:
+  leafylane-loki-volume:
+  leafylane-tempo-volume:
 
 networks:
   leafylane-app-network:
