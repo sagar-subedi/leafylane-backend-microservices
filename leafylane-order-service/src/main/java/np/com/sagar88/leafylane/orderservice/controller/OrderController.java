@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,6 +45,13 @@ public class OrderController {
 
         CreateOrderResponse createOrderResponse = orderService.getOrderById(orderId);
         return ResponseEntity.ok(createOrderResponse);
+    }
+
+    @PutMapping("/orders/{orderId}/deliver")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity deliverOrder(@PathVariable("orderId") String orderId) {
+        orderService.updateDeliveryStatus(orderId, true);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/order/myorders")

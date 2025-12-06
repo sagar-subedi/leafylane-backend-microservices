@@ -32,7 +32,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -320,6 +322,17 @@ public class OrderServiceImpl implements OrderService {
 
         return getCreateOrderResponses(order);
     }
+
+    @Override
+    public boolean updateDeliveryStatus(String orderId, boolean status) {
+        Order order = orderRepository.findByOrderId(orderId);
+        if ( order == null ) return false;
+        order.setDelivered(status);
+        order.setDeliveredDate(LocalDateTime.now());
+        orderRepository.save(order);
+        return true;
+    }
+
 
     private List<CreateOrderResponse> getCreateOrderResponses(Iterable<Order> order) {
         List<CreateOrderResponse> createOrderResponseList = new ArrayList<>();

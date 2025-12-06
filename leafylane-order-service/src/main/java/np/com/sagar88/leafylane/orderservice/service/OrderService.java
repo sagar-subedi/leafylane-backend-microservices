@@ -22,4 +22,6 @@ public interface OrderService {
     List<CreateOrderResponse> getMyOrders();
 
     List<CreateOrderResponse> getAllOrders();
+
+    boolean updateDeliveryStatus(String orderId, boolean status);
 }
